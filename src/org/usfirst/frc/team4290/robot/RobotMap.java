@@ -19,6 +19,7 @@ public class RobotMap {
 	public static SpeedController driveTrainLeftMotorOne;
 	public static SpeedController driveTrainLeftMotorTwo;
 	public static Spark cubeGrabMotor;
+	public static Spark cubeArmMotor;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
@@ -38,6 +39,7 @@ public class RobotMap {
 		driveTrain = new RobotDrive(driveTrainRightMotorTwo, driveTrainRightMotorOne, driveTrainLeftMotorTwo, driveTrainLeftMotorOne);
 		
 		cubeGrabMotor = new Spark(0);
+		cubeArmMotor = new Spark(1);
 		
 	
 	}
