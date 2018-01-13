@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4290.robot;
 
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
@@ -17,6 +18,7 @@ public class RobotMap {
 	public static SpeedController driveTrainRightMotorTwo;
 	public static SpeedController driveTrainLeftMotorOne;
 	public static SpeedController driveTrainLeftMotorTwo;
+	public static Spark cubeGrabMotor;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
@@ -34,6 +36,9 @@ public class RobotMap {
 		driveTrainRightMotorOne = new Talon(5);
 		driveTrainRightMotorTwo = new Talon(10);
 		driveTrain = new RobotDrive(driveTrainRightMotorTwo, driveTrainRightMotorOne, driveTrainLeftMotorTwo, driveTrainLeftMotorOne);
+		
+		cubeGrabMotor = new Spark(0);
+		
 	
 	}
 }
