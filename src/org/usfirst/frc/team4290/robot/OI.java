@@ -20,8 +20,9 @@ public class OI {
 	public JoystickButton cubeGrabButton;
 	public JoystickButton armRaiseButton;
 	public JoystickButton armLowerButton;
-	
-	public OI()
+	public JoystickButton cubeForkliftUpButton;
+	public JoystickButton cubeForkliftDownButton;
+
 	{
 		rightJoystick = new Joystick(0);
 		leftJoystick = new Joystick(1);
@@ -29,6 +30,8 @@ public class OI {
 		cubeGrabButton = new JoystickButton(rightJoystick, 4);
 		armRaiseButton = new JoystickButton(rightJoystick, 3);
 		armLowerButton = new JoystickButton(rightJoystick, 2);
+		cubeForkliftUpButton = new JoystickButton(leftJoystick,3);
+		cubeForkliftDownButton = new JoystickButton(leftJoystick,2);
 		
 		//Cube Grabbing
 		cubeDropButton.whenPressed(new CubeDropCommand());

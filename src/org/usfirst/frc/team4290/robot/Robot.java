@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4290.robot.subsystems.CubeArmSubsystem;
+import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeGrabSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.DriveTrain;
 
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static DriveTrain driveTrain;
 	public static CubeGrabSubsystem cubeGrab;
 	public static CubeArmSubsystem cubeArm;
+	public static CubeForkliftSubsystem cubeForklift;
 	
 	
 	Command autonomousCommand;
@@ -40,6 +42,7 @@ public class Robot extends IterativeRobot {
 		driveTrain = new DriveTrain();
 		cubeGrab = new CubeGrabSubsystem();
 		cubeArm = new CubeArmSubsystem();
+		cubeForklift = new CubeForkliftSubsystem();
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
