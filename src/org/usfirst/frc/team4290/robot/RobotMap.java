@@ -3,7 +3,10 @@ package org.usfirst.frc.team4290.robot;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -12,12 +15,12 @@ import edu.wpi.first.wpilibj.Talon;
  * floating around.
  */
 public class RobotMap {
-	public static RobotDrive driveTrain;
+	public static DifferentialDrive driveTrain;
 	
-	public static SpeedController driveTrainRightMotorOne;
-	public static SpeedController driveTrainRightMotorTwo;
-	public static SpeedController driveTrainLeftMotorOne;
-	public static SpeedController driveTrainLeftMotorTwo;
+	public static SpeedController driveTrainLeftMotorFront;
+	public static SpeedController driveTrainRightMotorBack;
+	public static SpeedController driveTrainRightMotorFront;
+	public static SpeedController driveTrainLeftMotorBack;
 	public static Spark cubeGrabMotor;
 	public static Spark cubeArmMotor;
 	public static Spark cubeForkliftMotor;
@@ -34,11 +37,13 @@ public class RobotMap {
 
 	public static void init() {
 		
-		driveTrainLeftMotorOne =  new Talon(4);
-		driveTrainLeftMotorTwo = new Talon(11);
-		driveTrainRightMotorOne = new Talon(5);
-		driveTrainRightMotorTwo = new Talon(10);
-		driveTrain = new RobotDrive(driveTrainRightMotorTwo, driveTrainRightMotorOne, driveTrainLeftMotorTwo, driveTrainLeftMotorOne);
+		driveTrainLeftMotorFront =  new Talon(4);
+		driveTrainLeftMotorBack = new Talon(11);
+		driveTrainRightMotorFront = new Talon(5);
+		driveTrainRightMotorBack = new Talon(10);
+		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront, driveTrainRightMotorBack);
+		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront, driveTrainLeftMotorBack);
+		driveTrain = new DifferentialDrive(leftSide, rightSide);
 		
 		cubeGrabMotor = new Spark(0);
 		cubeArmMotor = new Spark(1);

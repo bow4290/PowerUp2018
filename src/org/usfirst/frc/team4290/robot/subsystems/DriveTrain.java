@@ -73,11 +73,14 @@ public class DriveTrain extends Subsystem {
 		RobotMap.driveTrain.arcadeDrive(0, 0);
 	}
 	
-	public void driveTo(double x, double y)
+	public void driveForward()
 	{
-		SmartDashboard.putNumber("Turn X to center gear", x);
-
-		RobotMap.driveTrain.arcadeDrive(x, y);
+		RobotMap.driveTrain.arcadeDrive(0.5, 0);
+	}
+	
+	public void driveBackward()
+	{
+		RobotMap.driveTrain.arcadeDrive(-0.5, 0);
 	}
 	
 }
