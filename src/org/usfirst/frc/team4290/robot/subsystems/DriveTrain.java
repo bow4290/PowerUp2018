@@ -23,7 +23,8 @@ public class DriveTrain extends Subsystem {
     
     public void takeJoystickInputs(Joystick right) {
     	
-    	RobotMap.driveTrain.arcadeDrive(speedBuffer(right.getY(), 0.04), right.getX()*-1);
+    	RobotMap.driveTrain.arcadeDrive(right.getY(), right.getX());
+//    	RobotMap.driveTrain.arcadeDrive(.1, .1);
     	
     }
     

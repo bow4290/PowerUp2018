@@ -1,12 +1,12 @@
 package org.usfirst.frc.team4290.robot;
 
-import edu.wpi.first.wpilibj.RobotDrive;
+//import edu.wpi.first.wpilibj.RobotDrive;;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
+//import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -37,18 +37,18 @@ public class RobotMap {
 
 	public static void init() {
 		
-		driveTrainLeftMotorFront =  new Talon(4);
-		driveTrainLeftMotorBack = new Talon(11);
-		driveTrainRightMotorFront = new Talon(5);
-		driveTrainRightMotorBack = new Talon(10);
+		driveTrainLeftMotorFront =  new Talon(0);
+		driveTrainLeftMotorBack = new Talon(1);
+		driveTrainRightMotorFront = new Talon(2);
+		driveTrainRightMotorBack = new Talon(3);
 		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront, driveTrainRightMotorBack);
 		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront, driveTrainLeftMotorBack);
 		driveTrain = new DifferentialDrive(leftSide, rightSide);
 		
-		cubeGrabMotor = new Spark(0);
-		cubeArmMotor = new Spark(1);
-		cubeForkliftMotor = new Spark(2);
-		climberMotor = new Spark(3);
+//		cubeGrabMotor = new Spark(0);
+//		cubeArmMotor = new Spark(1);
+//		cubeForkliftMotor = new Spark(2);
+//		climberMotor = new Spark(3);
 	
 	}
 }

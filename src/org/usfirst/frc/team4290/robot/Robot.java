@@ -24,6 +24,7 @@ import org.usfirst.frc.team4290.robot.subsystems.DriveTrain;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
+	public static RobotMap robotMap;
 	public static DriveTrain driveTrain;
 	public static CubeGrabSubsystem cubeGrab;
 	public static CubeArmSubsystem cubeArm;
@@ -46,6 +47,7 @@ public class Robot extends IterativeRobot {
 		cubeArm = new CubeArmSubsystem();
 		cubeForklift = new CubeForkliftSubsystem();
 		climber = new ClimberSubsystem();
+		RobotMap.init();
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
