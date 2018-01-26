@@ -1,18 +1,24 @@
 
 package org.usfirst.frc.team4290.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team4290.robot.commands.AutoLeftCrossBaseline;
+import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftSwitch;
+import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeArmSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeGrabSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.DriveTrain;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +39,7 @@ public class Robot extends IterativeRobot {
 	
 	
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<String> chooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -50,7 +56,13 @@ public class Robot extends IterativeRobot {
 		RobotMap.init();
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		// chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		chooser = new SendableChooser<>();
+		chooser.addDefault("Middle", "M");//new AutoLeftCrossBaseline());
+		chooser.addObject("Right start", "R");//new AutoMiddleScoreLeftSwitch());
+		chooser.addObject("Middle start", "M");//new AutoMiddleScoreLeftSwitch());
+		chooser.addObject("Left start", "L");//new AutoMiddleScoreLeftSwitch());
+		SmartDashboard.putData("Start Position", chooser);
+		SmartDashboard.updateValues();
 	}
 
 	/**
@@ -81,7 +93,42 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+//		Get field data
+		String  gameData = DriverStation.getInstance().getGameSpecificMessage();
+		SendableChooser<String> position = (SendableChooser<String>) SmartDashboard.getData("Start Position");
+		SmartDashboard.putString("Position", position.getSelected());
+		
+//		Determine auto mode from field data
+		if ("M".equals(position.getSelected())) {
+			if ('L' == gameData.charAt(0)) {
+	//			Call auto middle score switch left
+				SmartDashboard.putString("Auto", "Middle Left");
+				} else {
+	//				call auto middle score switch right
+				SmartDashboard.putString("Auto", "Middle Right" + gameData);
+				} 
+		}else if ("L".equals(position.getSelected())) {
+			if ('L' == gameData.charAt(0)) {
+//				Auto Left score switch
+				SmartDashboard.putString("Auto", "Left Left");
+			}else {
+//				Auto cross baseline
+				SmartDashboard.putString("Auto", "Left Baseline");
+			}
+		}else {
+			if ('R' == gameData.charAt(0)) {
+//				Auto Right score switch
+				SmartDashboard.putString("Auto", "Right Right");
+				
+			}else {
+//				Auto cross baseline
+				SmartDashboard.putString("Auto", "Right Baseline");
+			}
+		}
+			
+			
+		
+//		autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
@@ -111,6 +158,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		
+//		SmartDashboard.putNumber("Gyro Init", RobotMap.turningGyro.getAngle());
 	}
 
 	/**
@@ -119,6 +168,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+//		SmartDashboard.putNumber("Gyro Periodic", RobotMap.turningGyro.getAngle());
 	}
 
 	/**

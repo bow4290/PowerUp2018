@@ -6,6 +6,8 @@ import org.usfirst.frc.team4290.robot.commands.ClimbDownCommand;
 import org.usfirst.frc.team4290.robot.commands.ClimbUpCommand;
 import org.usfirst.frc.team4290.robot.commands.CubeDropCommand;
 import org.usfirst.frc.team4290.robot.commands.CubeGrabCommand;
+import org.usfirst.frc.team4290.robot.commands.MoveForwardCommand;
+import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -26,6 +28,9 @@ public class OI {
 	public JoystickButton cubeForkliftDownButton;
 	public JoystickButton climbUpButton;
 	public JoystickButton climbDownButton;
+	
+	
+	public JoystickButton testGyroDELETE;
 
 	{
 		rightJoystick = new Joystick(0);
@@ -36,8 +41,9 @@ public class OI {
 		armLowerButton = new JoystickButton(rightJoystick, 2);
 		cubeForkliftUpButton = new JoystickButton(leftJoystick,3);
 		cubeForkliftDownButton = new JoystickButton(leftJoystick,2);
-		climbUpButton = new JoystickButton(rightJoystick,1);
+//		climbUpButton = new JoystickButton(rightJoystick,1);
 		climbDownButton = new JoystickButton(leftJoystick,1);
+		testGyroDELETE = new JoystickButton(rightJoystick, 1);
 		
 		//Cube Grabbing
 		cubeDropButton.whenPressed(new CubeDropCommand());
@@ -48,8 +54,10 @@ public class OI {
 		armRaiseButton.whileHeld(new ArmLowerCommand());
 		
 		//Climber
-		climbUpButton.whileHeld(new ClimbUpCommand());
+//		climbUpButton.whileHeld(new ClimbUpCommand());
 		climbDownButton.whileHeld(new ClimbDownCommand());
+		
+		testGyroDELETE.whileHeld(new MoveForwardCommand());
 	}
 }
 

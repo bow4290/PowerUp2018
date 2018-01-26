@@ -61,12 +61,12 @@ public class DriveTrain extends Subsystem {
 	
 	public void turnRight()
 	{
-		RobotMap.driveTrain.arcadeDrive(0, -0.6);
+		RobotMap.driveTrain.arcadeDrive(0, 0.6);
 	}
 	
 	public void turnLeft()
 	{
-		RobotMap.driveTrain.arcadeDrive(0, 0.6);
+		RobotMap.driveTrain.arcadeDrive(0, -0.6);
 	}
 	
 	public void stop()
@@ -76,12 +76,17 @@ public class DriveTrain extends Subsystem {
 	
 	public void driveForward()
 	{
-		RobotMap.driveTrain.arcadeDrive(0.5, 0);
+		double angle = RobotMap.turningGyro.getAngle();
+    	SmartDashboard.putNumber("Original Angle", angle);
+    	SmartDashboard.putNumber("Turn Angle", -angle * 0.01);
+
+		
+		RobotMap.driveTrain.arcadeDrive(0.6, -angle * 0.01);
 	}
 	
 	public void driveBackward()
 	{
-		RobotMap.driveTrain.arcadeDrive(-0.5, 0);
+		RobotMap.driveTrain.arcadeDrive(-0.6, 0);
 	}
 	
 }

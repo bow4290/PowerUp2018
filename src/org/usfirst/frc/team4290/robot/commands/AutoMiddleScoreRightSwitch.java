@@ -14,27 +14,27 @@ public class AutoMiddleScoreRightSwitch extends CommandGroup {
         // these will run in order.
     	//TODO
     	//moveForward command parallel
-    	addParallel(new MoveForwardCommand(), 1.0);
+    	addParallel(new MoveForwardCommand(), 1.5);
     	//cube grab command parallel
 //    	addParallel(new CubeGrabCommand(), 1.0);
     	// right turn command sequential
     	addSequential(new TurnRightCommand(), 1.0);
     	//move forward command sequential
-    	addSequential(new MoveForwardCommand(), 1.0);
+//    	addSequential(new MoveForwardCommand(), 1.0);
     	//left turn command sequential
-    	addSequential(new TurnLeftCommand(), 1.0);
+//    	addSequential(new TurnLeftCommand(), 1.0);
     	//move forward command sequential
-    	addSequential(new MoveForwardCommand(), 1.0);
+//    	addSequential(new MoveForwardCommand(), 1.0);
     	//Left turn command sequential
-    	addSequential(new TurnLeftCommand(), 1.0);
+//    	addSequential(new TurnLeftCommand(), 1.0);
     	//raise fork lift command parallel
 //    	addParallel(new ForkliftRaiseCommand(), 1.0);
     	//move forward command parallel
-    	addParallel(new MoveForwardCommand(), 1.0);
+//    	addParallel(new MoveForwardCommand(), 1.0);
     	//drop cube command sequential
 //    	addSequential(new CubeDropCommand(), 1.0);
     	//move backwards command parallel
-    	addParallel(new MoveBackwardCommand(), 1.0);
+//    	addParallel(new MoveBackwardCommand(), 1.0);
     	//lower fork lift command parallel
 //    	addParallel(new ForkliftLowerCommand(), 1.0);
 
