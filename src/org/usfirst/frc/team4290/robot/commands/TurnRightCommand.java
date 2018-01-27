@@ -1,8 +1,10 @@
 package org.usfirst.frc.team4290.robot.commands;
 
 import org.usfirst.frc.team4290.robot.Robot;
+import org.usfirst.frc.team4290.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -16,6 +18,8 @@ public class TurnRightCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	RobotMap.turningGyro.reset();
+    	SmartDashboard.putNumber("Right Turn Gyro Reset Value", RobotMap.turningGyro.getAngle());
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -25,7 +29,9 @@ public class TurnRightCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+    	SmartDashboard.putNumber("Right Turn Gyro Turn Value", RobotMap.turningGyro.getAngle());
+    	SmartDashboard.putBoolean("Right IsFinished Check", RobotMap.turningGyro.getAngle() > 90);
+    	return RobotMap.turningGyro.getAngle() > 90;    
     }
 
     // Called once after isFinished returns true

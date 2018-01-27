@@ -124,9 +124,10 @@ public class Robot extends IterativeRobot {
 //				Auto cross baseline
 				SmartDashboard.putString("Auto", "Right Baseline");
 			}
+			
 		}
-			
-			
+		//TODO: REMOVE THIS FOR TESTING ONLY
+		autonomousCommand = new AutoMiddleScoreLeftSwitch();			
 		
 //		autonomousCommand = chooser.getSelected();
 

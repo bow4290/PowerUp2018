@@ -1,5 +1,6 @@
 package org.usfirst.frc.team4290.robot.subsystems;
 
+import org.usfirst.frc.team4290.robot.Robot;
 import org.usfirst.frc.team4290.robot.RobotMap;
 import org.usfirst.frc.team4290.robot.commands.DriveWithJoysticks;
 
@@ -78,10 +79,13 @@ public class DriveTrain extends Subsystem {
 	{
 		double angle = RobotMap.turningGyro.getAngle();
     	SmartDashboard.putNumber("Original Angle", angle);
-    	SmartDashboard.putNumber("Turn Angle", -angle * 0.01);
+//    	SmartDashboard.putNumber("Turn Angle", -angle * 0.05);
+    	SmartDashboard.putNumber("Left Speed", 0.6 * (angle * 0.05));
+    	SmartDashboard.putNumber("Right Speed" , 0.6 * (angle * 0.01));
 
 		
-		RobotMap.driveTrain.arcadeDrive(0.6, -angle * 0.01);
+//		RobotMap.driveTrain.arcadeDrive(0.6, -angle * 0.05);
+		RobotMap.driveTrain.tankDrive(0.6, 0.55);
 	}
 	
 	public void driveBackward()

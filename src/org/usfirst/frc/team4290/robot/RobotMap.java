@@ -24,8 +24,8 @@ public class RobotMap {
 	public static SpeedController driveTrainLeftMotorBack;
 	public static Spark cubeGrabMotor;
 	public static Spark cubeArmMotor;
-	public static Spark cubeForkliftMotor;
-	public static Spark climberMotor;
+	public static Talon cubeForkliftMotor;
+	public static Talon climberMotor;
 	public static ADXRS450_Gyro turningGyro;
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
@@ -36,13 +36,18 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
+	
+	//Wire 4 Connect to 0
+	//Wire 5 Connect to 1
+	//Wire 3 connect to 2
+	//Wire 1 connect to 3
 
 	public static void init() {
 		
-		driveTrainLeftMotorFront =  new Talon(0);
-		driveTrainLeftMotorBack = new Talon(2);
-		driveTrainRightMotorFront = new Talon(1);
-		driveTrainRightMotorBack = new Talon(3);
+		driveTrainLeftMotorFront =  new Talon(0); //Changed from 5/0 PowerUpBot
+		driveTrainLeftMotorBack = new Talon(2); //changed from 2
+		driveTrainRightMotorFront = new Talon(1);//Changed from 4/1 PowerUpBot
+		driveTrainRightMotorBack = new Talon(3); //changed from 3
 		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront, driveTrainRightMotorBack);
 		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront, driveTrainLeftMotorBack);
 		driveTrain = new DifferentialDrive(leftSide, rightSide);
@@ -50,8 +55,8 @@ public class RobotMap {
 		
 //		cubeGrabMotor = new Spark(0);
 //		cubeArmMotor = new Spark(1);
-//		cubeForkliftMotor = new Spark(2);
-//		climberMotor = new Spark(3);
+//		cubeForkliftMotor = new Talon(2);
+//		climberMotor = new Talon(3);
 	
 	}
 }
