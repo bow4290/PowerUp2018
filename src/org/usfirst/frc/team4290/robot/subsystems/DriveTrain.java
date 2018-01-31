@@ -62,12 +62,12 @@ public class DriveTrain extends Subsystem {
 	
 	public void turnRight()
 	{
-		RobotMap.driveTrain.arcadeDrive(0, 0.6);
+		RobotMap.driveTrain.arcadeDrive(0, 0.5);
 	}
 	
 	public void turnLeft()
 	{
-		RobotMap.driveTrain.arcadeDrive(0, -0.6);
+		RobotMap.driveTrain.arcadeDrive(0, -0.5);
 	}
 	
 	public void stop()
@@ -85,7 +85,22 @@ public class DriveTrain extends Subsystem {
 
 		
 //		RobotMap.driveTrain.arcadeDrive(0.6, -angle * 0.05);
-		RobotMap.driveTrain.tankDrive(0.6, 0.55);
+    	if(angle > 2.0)
+    	{
+        	SmartDashboard.putNumber("Drift Right Angle", angle);
+    		RobotMap.driveTrain.tankDrive(0.6, 0.6);
+    	}
+    	else if(angle < -2.0)
+    	{
+        	SmartDashboard.putNumber("Drift Left Angle", angle);
+    		RobotMap.driveTrain.tankDrive(0.6, 0.5);
+    	}
+    	else
+    	{
+    		SmartDashboard.putNumber("Drive Forward Angle", angle);
+    		RobotMap.driveTrain.tankDrive(0.6, 0.55);
+    	}
+    	
 	}
 	
 	public void driveBackward()

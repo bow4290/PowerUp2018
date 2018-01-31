@@ -4,6 +4,7 @@ import org.usfirst.frc.team4290.robot.Robot;
 import org.usfirst.frc.team4290.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -17,7 +18,10 @@ public class MoveForwardCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	SmartDashboard.putNumber("Move forward pre reset", RobotMap.turningGyro.getAngle());
     	RobotMap.turningGyro.reset();
+    	SmartDashboard.putNumber("Move forward reset", RobotMap.turningGyro.getAngle());
+
     }
 
     // Called repeatedly when this Command is scheduled to run

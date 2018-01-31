@@ -31,7 +31,7 @@ public class TurnRightCommand extends Command {
     protected boolean isFinished() {
     	SmartDashboard.putNumber("Right Turn Gyro Turn Value", RobotMap.turningGyro.getAngle());
     	SmartDashboard.putBoolean("Right IsFinished Check", RobotMap.turningGyro.getAngle() > 90);
-    	return RobotMap.turningGyro.getAngle() > 90;    
+    	return RobotMap.turningGyro.getAngle() > 88;    
     }
 
     // Called once after isFinished returns true

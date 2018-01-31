@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4290.robot.commands.AutoLeftCrossBaseline;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightSwitch;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeArmSubsystem;
@@ -127,7 +128,7 @@ public class Robot extends IterativeRobot {
 			
 		}
 		//TODO: REMOVE THIS FOR TESTING ONLY
-		autonomousCommand = new AutoMiddleScoreLeftSwitch();			
+		autonomousCommand = new AutoMiddleScoreRightSwitch();			
 		
 //		autonomousCommand = chooser.getSelected();
 
