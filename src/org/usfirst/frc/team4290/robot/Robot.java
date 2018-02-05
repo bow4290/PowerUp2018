@@ -128,7 +128,7 @@ public class Robot extends IterativeRobot {
 			
 		}
 		//TODO: REMOVE THIS FOR TESTING ONLY
-		autonomousCommand = new AutoMiddleScoreRightSwitch();			
+		autonomousCommand = new AutoMiddleScoreLeftSwitch();			
 		
 //		autonomousCommand = chooser.getSelected();
 

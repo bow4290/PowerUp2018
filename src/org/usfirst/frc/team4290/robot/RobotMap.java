@@ -45,18 +45,18 @@ public class RobotMap {
 	public static void init() {
 		
 		driveTrainLeftMotorFront =  new Talon(0); //Changed from 5/0 PowerUpBot
-		driveTrainLeftMotorBack = new Talon(2); //changed from 2
+//		driveTrainLeftMotorBack = new Talon(2); //changed from 2
 		driveTrainRightMotorFront = new Talon(1);//Changed from 4/1 PowerUpBot
-		driveTrainRightMotorBack = new Talon(3); //changed from 3
-		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront, driveTrainRightMotorBack);
-		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront, driveTrainLeftMotorBack);
+//		driveTrainRightMotorBack = new Talon(3); //changed from 3
+		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront);
+		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront);
 		driveTrain = new DifferentialDrive(leftSide, rightSide);
 		turningGyro = new ADXRS450_Gyro();
 		
-//		cubeGrabMotor = new Spark(0);
+//		cubeGrabMotor = new Spark(3);
 //		cubeArmMotor = new Spark(1);
-//		cubeForkliftMotor = new Talon(2);
-//		climberMotor = new Talon(3);
+		cubeForkliftMotor = new Talon(2);
+		climberMotor = new Talon(3);
 	
 	}
 }

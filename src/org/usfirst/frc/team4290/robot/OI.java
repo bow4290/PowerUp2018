@@ -6,6 +6,8 @@ import org.usfirst.frc.team4290.robot.commands.ClimbDownCommand;
 import org.usfirst.frc.team4290.robot.commands.ClimbUpCommand;
 import org.usfirst.frc.team4290.robot.commands.CubeDropCommand;
 import org.usfirst.frc.team4290.robot.commands.CubeGrabCommand;
+import org.usfirst.frc.team4290.robot.commands.ForkliftLowerCommand;
+import org.usfirst.frc.team4290.robot.commands.ForkliftRaiseCommand;
 import org.usfirst.frc.team4290.robot.commands.MoveForwardCommand;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 
@@ -35,29 +37,32 @@ public class OI {
 	{
 		rightJoystick = new Joystick(0);
 		leftJoystick = new Joystick(1);
-		cubeDropButton = new JoystickButton(rightJoystick, 5);
-		cubeGrabButton = new JoystickButton(rightJoystick, 4);
-		armRaiseButton = new JoystickButton(rightJoystick, 3);
-		armLowerButton = new JoystickButton(rightJoystick, 2);
-		cubeForkliftUpButton = new JoystickButton(leftJoystick,3);
-		cubeForkliftDownButton = new JoystickButton(leftJoystick,2);
-//		climbUpButton = new JoystickButton(rightJoystick,1);
-		climbDownButton = new JoystickButton(leftJoystick,1);
-		testGyroDELETE = new JoystickButton(rightJoystick, 1);
+//		cubeDropButton = new JoystickButton(rightJoystick, 5);
+//		cubeGrabButton = new JoystickButton(rightJoystick, 4);
+//		armRaiseButton = new JoystickButton(rightJoystick, 3);
+//		armLowerButton = new JoystickButton(rightJoystick, 2);
+		cubeForkliftUpButton = new JoystickButton(rightJoystick, 3);
+		cubeForkliftDownButton = new JoystickButton(rightJoystick, 4);
+		climbUpButton = new JoystickButton(rightJoystick, 1);
+		climbDownButton = new JoystickButton(rightJoystick, 5);
+//		testGyroDELETE = new JoystickButton(rightJoystick, 1);
 		
 		//Cube Grabbing
-		cubeDropButton.whenPressed(new CubeDropCommand());
-		cubeGrabButton.whenPressed(new CubeGrabCommand());
+//		cubeDropButton.whenPressed(new CubeDropCommand());
+//		cubeGrabButton.whenPressed(new CubeGrabCommand());
 		
 		//Cube Arm Raise/Lower
-		armRaiseButton.whileHeld(new ArmRaiseCommand());
-		armRaiseButton.whileHeld(new ArmLowerCommand());
+//		armRaiseButton.whileHeld(new ArmRaiseCommand());
+//		armRaiseButton.whileHeld(new ArmLowerCommand());
 		
 		//Climber
-//		climbUpButton.whileHeld(new ClimbUpCommand());
+		climbUpButton.whileHeld(new ClimbUpCommand());
 		climbDownButton.whileHeld(new ClimbDownCommand());
 		
-		testGyroDELETE.whileHeld(new MoveForwardCommand());
+		cubeForkliftUpButton.whileHeld(new ForkliftRaiseCommand());
+		cubeForkliftDownButton.whileHeld(new ForkliftLowerCommand());
+		
+//		testGyroDELETE.whileHeld(new MoveForwardCommand());
 	}
 }
 
