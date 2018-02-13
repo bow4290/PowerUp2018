@@ -21,7 +21,7 @@ public class TurnLeftCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	RobotMap.turningGyro.reset();
-    	SmartDashboard.putNumber("Left Turn Gyro Reset Value", RobotMap.turningGyro.getAngle());
+//    	SmartDashboard.putNumber("Left Turn Gyro Reset Value", RobotMap.turningGyro.getAngle());
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -31,9 +31,9 @@ public class TurnLeftCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	SmartDashboard.putNumber("Left Turn Gyro Execute Value", RobotMap.turningGyro.getAngle());
-    	SmartDashboard.putBoolean("Left IsFinished Check", RobotMap.turningGyro.getAngle() < -90);
-    	return RobotMap.turningGyro.getAngle() < -88;
+//    	SmartDashboard.putNumber("Left Turn Gyro Execute Value", RobotMap.turningGyro.getAngle());
+//    	SmartDashboard.putBoolean("Left IsFinished Check", RobotMap.turningGyro.getAngle() < -90);
+    	return RobotMap.turningGyro.getAngle() < -85;
     }
 
     // Called once after isFinished returns true

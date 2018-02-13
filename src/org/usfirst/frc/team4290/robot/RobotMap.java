@@ -1,11 +1,14 @@
 package org.usfirst.frc.team4290.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.RobotDrive;;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Ultrasonic;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
@@ -22,11 +25,15 @@ public class RobotMap {
 	public static SpeedController driveTrainRightMotorBack;
 	public static SpeedController driveTrainRightMotorFront;
 	public static SpeedController driveTrainLeftMotorBack;
+	//Remove Cube Grab motor when not testing
 	public static Spark cubeGrabMotor;
 	public static Spark cubeArmMotor;
 	public static Talon cubeForkliftMotor;
 	public static Talon climberMotor;
 	public static ADXRS450_Gyro turningGyro;
+	public static Solenoid gearShiftSolenoid;
+	public static Solenoid cubeGrabSolenoid;
+	public static Ultrasonic sonarSensor; 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
@@ -52,11 +59,14 @@ public class RobotMap {
 		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront);
 		driveTrain = new DifferentialDrive(leftSide, rightSide);
 		turningGyro = new ADXRS450_Gyro();
-		
+		cubeGrabSolenoid = new Solenoid(5);
+		gearShiftSolenoid = new Solenoid(4);
 //		cubeGrabMotor = new Spark(3);
 //		cubeArmMotor = new Spark(1);
 		cubeForkliftMotor = new Talon(2);
 		climberMotor = new Talon(3);
+		sonarSensor = new Ultrasonic(0, 10);
+		sonarSensor.setAutomaticMode(true);
 	
 	}
 }

@@ -4,6 +4,7 @@ package org.usfirst.frc.team4290.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -11,14 +12,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team4290.robot.commands.AutoLeftCrossBaseline;
+import org.usfirst.frc.team4290.robot.commands.AutoLeftScoreScale;
+import org.usfirst.frc.team4290.robot.commands.AutoLeftScoreSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoMiddleCrossBaselineOnLeft;
+import org.usfirst.frc.team4290.robot.commands.AutoMiddleCrossBaselineOnRight;
+import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoRightCrossBaseline;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeArmSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeGrabSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team4290.robot.subsystems.SolenoidSubsystem;
 
 
 /**
@@ -37,10 +46,11 @@ public class Robot extends IterativeRobot {
 	public static CubeArmSubsystem cubeArm;
 	public static CubeForkliftSubsystem cubeForklift;
 	public static ClimberSubsystem climber;
-	
+	public static SolenoidSubsystem pneumatics;
 	
 	Command autonomousCommand;
-	SendableChooser<String> chooser;
+	SendableChooser<String> positionChooser;
+	SendableChooser<String> scoreChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -54,16 +64,21 @@ public class Robot extends IterativeRobot {
 		cubeArm = new CubeArmSubsystem();
 		cubeForklift = new CubeForkliftSubsystem();
 		climber = new ClimberSubsystem();
+		pneumatics = new SolenoidSubsystem();
 		RobotMap.init();
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		// chooser.addObject("My Auto", new MyAutoCommand());
-		chooser = new SendableChooser<>();
-		chooser.addDefault("Middle", "M");//new AutoLeftCrossBaseline());
-		chooser.addObject("Right start", "R");//new AutoMiddleScoreLeftSwitch());
-		chooser.addObject("Middle start", "M");//new AutoMiddleScoreLeftSwitch());
-		chooser.addObject("Left start", "L");//new AutoMiddleScoreLeftSwitch());
-		SmartDashboard.putData("Start Position", chooser);
-		SmartDashboard.updateValues();
+		positionChooser = new SendableChooser<>();
+		positionChooser.addDefault("Middle", "M");//new AutoLeftCrossBaseline());
+		positionChooser.addObject("Right start", "R");//new AutoMiddleScoreLeftSwitch());
+		positionChooser.addObject("Left start", "L");//new AutoMiddleScoreLeftSwitch());
+		SmartDashboard.putData("Start Position", positionChooser);
+//		SmartDashboard.updateValues();
+		scoreChooser = new SendableChooser<>();
+		scoreChooser.addDefault("Score Switch", "switch");
+		scoreChooser.addObject("Cross baseline", "baseline");
+		scoreChooser.addObject("Score scale", "scale");
+		SmartDashboard.putData("Score", scoreChooser);
 	}
 
 	/**
@@ -97,38 +112,120 @@ public class Robot extends IterativeRobot {
 //		Get field data
 		String  gameData = DriverStation.getInstance().getGameSpecificMessage();
 		SendableChooser<String> position = (SendableChooser<String>) SmartDashboard.getData("Start Position");
-		SmartDashboard.putString("Position", position.getSelected());
+		SendableChooser<String> score = (SendableChooser<String>) SmartDashboard.getData("Score");
 		
-//		Determine auto mode from field data
-		if ("M".equals(position.getSelected())) {
-			if ('L' == gameData.charAt(0)) {
-	//			Call auto middle score switch left
-				SmartDashboard.putString("Auto", "Middle Left");
-				} else {
-	//				call auto middle score switch right
-				SmartDashboard.putString("Auto", "Middle Right" + gameData);
-				} 
-		}else if ("L".equals(position.getSelected())) {
-			if ('L' == gameData.charAt(0)) {
-//				Auto Left score switch
-				SmartDashboard.putString("Auto", "Left Left");
-			}else {
-//				Auto cross baseline
-				SmartDashboard.putString("Auto", "Left Baseline");
-			}
-		}else {
-			if ('R' == gameData.charAt(0)) {
-//				Auto Right score switch
-				SmartDashboard.putString("Auto", "Right Right");
+		switch (position.getSelected().toString()) {
+		case "M":
+			SmartDashboard.putString("Case M", "Case M");
+			switch (score.getSelected().toString()) {
+			case "switch":
+				SmartDashboard.putString("Case Switch", "Case M Switch");
+
+				if (gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoMiddleScoreLeftSwitch();
+				}
+				else {
+					autonomousCommand = new AutoMiddleScoreRightSwitch();
+				}
+				break;
+			case "baseline":
+				SmartDashboard.putString("Case M baseline", "Case M baseline");
+
+				if (gameData.charAt(1) == 'L') {
+					autonomousCommand = new AutoMiddleCrossBaselineOnRight();
+				}
+				else {
+					autonomousCommand = new AutoMiddleCrossBaselineOnLeft();
+				}
+				break;
+			case "scale":
+				SmartDashboard.putString("Case M scale", "Case M scale");
 				
-			}else {
-//				Auto cross baseline
-				SmartDashboard.putString("Auto", "Right Baseline");
+				if (gameData.charAt(1) == 'L' &&  gameData.charAt(0) != 'L') {
+					autonomousCommand = new AutoMiddleScoreLeftScale();
+				}
+				else {
+					autonomousCommand = new AutoMiddleScoreRightScale();
+				//TODO: Add baseline commands
+				}
+				break;
+			default:
+				break;
 			}
-			
+			break;
+		case "L":
+			SmartDashboard.putString("Case L", "Case L");
+
+			switch (score.getSelected().toString()) {
+			case "switch":
+				SmartDashboard.putString("Case L switch", "Case L switch");
+
+				if (gameData.charAt(0) == 'L') {
+					autonomousCommand = new AutoLeftScoreSwitch();
+				}
+				else if (gameData.charAt(1) == 'L'){
+					autonomousCommand = new AutoLeftScoreScale();
+				}
+				else {
+					autonomousCommand = new AutoLeftCrossBaseline();
+				}
+				break;
+			case "baseline":
+				SmartDashboard.putString("Case L baseline", "Case L baseline");
+
+				autonomousCommand = new AutoLeftCrossBaseline();
+				
+				break;
+			case "scale": 
+				SmartDashboard.putString("Case L scale", "Case L scale");
+
+				if (gameData.charAt(1) == 'L') {
+					autonomousCommand = new AutoLeftScoreScale();
+				}else {
+					autonomousCommand = new AutoLeftCrossBaseline(); 
+				}
+				
+				break;
+			default:
+				break;
+			}
+			break;
+		case "R":
+			SmartDashboard.putString("Case R", "Case R");
+
+			switch (score.getSelected().toString()) {
+			case "switch":
+				SmartDashboard.putString("Case R switch", "Case R switch");
+				break;
+			case "baseline":
+				SmartDashboard.putString("Case R baseline", "Case R baseline");
+
+				autonomousCommand = new AutoRightCrossBaseline();
+				
+				break;
+			case "scale":		
+				SmartDashboard.putString("Case R scale", "Case R scale");
+
+				if (gameData.charAt(1) == 'R') {
+				autonomousCommand = new AutoLeftScoreScale();
+			}else {
+				autonomousCommand = new AutoLeftCrossBaseline(); 
+			}
+				
+				break;
+			default:
+				break;
+			}
+			break;
+		default:
+
+			break;
 		}
+		
+		SmartDashboard.putString("default", position.getSelected().toString() + " " + score.getSelected().toString());
+
 		//TODO: REMOVE THIS FOR TESTING ONLY
-		autonomousCommand = new AutoMiddleScoreLeftSwitch();			
+//		autonomousCommand = new AutoLeftScoreScale();			
 		
 //		autonomousCommand = chooser.getSelected();
 

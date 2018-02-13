@@ -4,7 +4,9 @@ import org.usfirst.frc.team4290.robot.Robot;
 import org.usfirst.frc.team4290.robot.RobotMap;
 import org.usfirst.frc.team4290.robot.commands.DriveWithJoysticks;
 
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -22,9 +24,9 @@ public class DriveTrain extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void takeJoystickInputs(Joystick right) {
+    public void takeJoystickInputs(XboxController xBoxController) {
     	
-    	RobotMap.driveTrain.arcadeDrive(speedBuffer(right.getY(), 0.08), right.getX());
+    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.03), xBoxController.getX(Hand.kRight));
 //    	RobotMap.driveTrain.arcadeDrive(.1, .1);
     	
     }
@@ -62,12 +64,12 @@ public class DriveTrain extends Subsystem {
 	
 	public void turnRight()
 	{
-		RobotMap.driveTrain.arcadeDrive(0, 0.5);
+		RobotMap.driveTrain.arcadeDrive(0, 0.6);
 	}
 	
 	public void turnLeft()
 	{
-		RobotMap.driveTrain.arcadeDrive(0, -0.5);
+		RobotMap.driveTrain.arcadeDrive(0, -0.6);
 	}
 	
 	public void stop()
@@ -80,25 +82,25 @@ public class DriveTrain extends Subsystem {
 		double angle = RobotMap.turningGyro.getAngle();
     	SmartDashboard.putNumber("Original Angle", angle);
 //    	SmartDashboard.putNumber("Turn Angle", -angle * 0.05);
-    	SmartDashboard.putNumber("Left Speed", 0.6 * (angle * 0.05));
-    	SmartDashboard.putNumber("Right Speed" , 0.6 * (angle * 0.01));
+//    	SmartDashboard.putNumber("Left Speed", 0.6 * (angle * 0.05));
+//    	SmartDashboard.putNumber("Right Speed" , 0.6 * (angle * 0.01));
 
 		
 //		RobotMap.driveTrain.arcadeDrive(0.6, -angle * 0.05);
     	if(angle > 2.0)
     	{
         	SmartDashboard.putNumber("Drift Right Angle", angle);
-    		RobotMap.driveTrain.tankDrive(0.6, 0.6);
+    		RobotMap.driveTrain.tankDrive(0.7, 0.8);
     	}
     	else if(angle < -2.0)
     	{
         	SmartDashboard.putNumber("Drift Left Angle", angle);
-    		RobotMap.driveTrain.tankDrive(0.6, 0.5);
+    		RobotMap.driveTrain.tankDrive(0.7, 0.6);
     	}
     	else
     	{
     		SmartDashboard.putNumber("Drive Forward Angle", angle);
-    		RobotMap.driveTrain.tankDrive(0.6, 0.55);
+    		RobotMap.driveTrain.tankDrive(0.7, 0.65);
     	}
     	
 	}

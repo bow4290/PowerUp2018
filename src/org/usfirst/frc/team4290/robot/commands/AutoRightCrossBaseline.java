@@ -15,7 +15,7 @@ public class AutoRightCrossBaseline extends CommandGroup {
     	
     	// TODO Sequence to add:
     	// Add Sequential Drive Forward
-    	addSequential(new MoveForwardCommand(), 3.0);
+    	addSequential(new MoveForwardCommand(0.0), 3.75);
     	
 
 

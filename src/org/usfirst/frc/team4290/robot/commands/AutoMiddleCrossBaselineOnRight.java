@@ -14,14 +14,15 @@ public class AutoMiddleCrossBaselineOnRight extends CommandGroup {
         // these will run in order.
     	
     	// TODO: Add Sequences
+    	addSequential(new MoveForwardCommand(12.0), 0.5);
     	// Add Right Turn Sequence
-    	addSequential(new TurnRightCommand(), 1.0);
+    	addSequential(new TurnRightCommand());
     	// Add Move Forward Sequence
-    	addSequential(new MoveForwardCommand(), 2.0);
+    	addSequential(new MoveForwardCommand(12.0), 2.5);
     	// Add Turn Left Sequence
-    	addSequential(new TurnLeftCommand(), 1.0);
+    	addSequential(new TurnLeftCommand());
     	// Add Move Forward Sequence
-    	addSequential(new MoveForwardCommand(), 2.0);
+    	addSequential(new MoveForwardCommand(0.0), 3.5);
 
         // To run multiple commands at the same time,
         // use addParallel()

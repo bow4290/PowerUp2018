@@ -15,7 +15,7 @@ public class AutoLeftCrossBaseline extends CommandGroup {
     	
     	// TODO: Sequence to add:
     	// Add Sequential Drive Forward
-    	addSequential(new MoveForwardCommand(), 3.0);
+    	addSequential(new MoveForwardCommand(0.0), 4);
 
         // To run multiple commands at the same time,
         // use addParallel()
