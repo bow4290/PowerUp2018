@@ -1,6 +1,7 @@
 package org.usfirst.frc.team4290.robot;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.RobotDrive;;
@@ -33,7 +34,7 @@ public class RobotMap {
 	public static ADXRS450_Gyro turningGyro;
 	public static Solenoid gearShiftSolenoid;
 	public static Solenoid cubeGrabSolenoid;
-	public static Ultrasonic sonarSensor; 
+	public static AnalogInput sonarSensor; 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
 	// public static int leftMotor = 1;
@@ -50,7 +51,7 @@ public class RobotMap {
 	//Wire 1 connect to 3
 
 	public static void init() {
-		
+
 		driveTrainLeftMotorFront =  new Talon(0); //Changed from 5/0 PowerUpBot
 //		driveTrainLeftMotorBack = new Talon(2); //changed from 2
 		driveTrainRightMotorFront = new Talon(1);//Changed from 4/1 PowerUpBot
@@ -65,8 +66,7 @@ public class RobotMap {
 //		cubeArmMotor = new Spark(1);
 		cubeForkliftMotor = new Talon(2);
 		climberMotor = new Talon(3);
-		sonarSensor = new Ultrasonic(0, 10);
-		sonarSensor.setAutomaticMode(true);
+		sonarSensor = new AnalogInput(1);
 	
 	}
 }

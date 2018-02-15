@@ -22,6 +22,7 @@ public class MoveForwardCommand extends Command {
     protected void initialize() {
 //    	SmartDashboard.putNumber("Move forward pre reset", RobotMap.turningGyro.getAngle());
     	RobotMap.turningGyro.reset();
+    	RobotMap.sonarSensor.resetAccumulator();
 //    	SmartDashboard.putNumber("Move forward reset", RobotMap.turningGyro.getAngle());
 
     }
@@ -33,7 +34,7 @@ public class MoveForwardCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	double sonarDistance = RobotMap.sonarSensor.getRangeInches(); 
+    	double sonarDistance = RobotMap.sonarSensor.getAverageVoltage() * 40.69;
     	SmartDashboard.putNumber("sonar distance", sonarDistance);
     	SmartDashboard.putNumber("stop distance", distance);
     	if (distance == 0.0 ) {

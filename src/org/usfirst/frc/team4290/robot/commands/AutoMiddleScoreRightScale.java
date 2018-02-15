@@ -5,19 +5,19 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoRightCrossBaseline extends CommandGroup {
+public class AutoMiddleScoreRightScale extends CommandGroup {
 
-    public AutoRightCrossBaseline() {
+    public AutoMiddleScoreRightScale() {
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	
-    	// TODO Sequence to add:
-    	// Add Sequential Drive Forward
-    	addSequential(new MoveForwardCommand(24.0));
-    	
-
+    	addSequential(new MoveForwardCommand(12.0), 0.5);
+    	addSequential(new TurnRightCommand());
+    	addSequential(new MoveForwardCommand(12.0), 2.5);
+    	addSequential(new TurnLeftCommand());
+    	addSequential(new MoveForwardCommand(6.0), 5.0);
+    	addSequential(new TurnLeftCommand());
 
         // To run multiple commands at the same time,
         // use addParallel()
