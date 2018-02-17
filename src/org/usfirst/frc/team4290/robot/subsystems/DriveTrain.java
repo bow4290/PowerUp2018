@@ -26,8 +26,8 @@ public class DriveTrain extends Subsystem {
     
     public void takeJoystickInputs(XboxController xBoxController) {
     	
-    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.03), xBoxController.getX(Hand.kLeft));
-//    	RobotMap.driveTrain.arcadeDrive(.1, .1);
+    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.03), -xBoxController.getX(Hand.kRight));
+//    	RobotMap.driveTrain.arcadeDrive(xBoxController.getY(Hand.kLeft), xBoxController.getX(Hand.kLeft));
     	
     }
     
@@ -95,12 +95,12 @@ public class DriveTrain extends Subsystem {
     	else if(angle < -2.0)
     	{
         	SmartDashboard.putNumber("Drift Left Angle", angle);
-    		RobotMap.driveTrain.tankDrive(0.6, 0.5);
+    		RobotMap.driveTrain.tankDrive(0.7, 0.6);
     	}
     	else
     	{
     		SmartDashboard.putNumber("Drive Forward Angle", angle);
-    		RobotMap.driveTrain.tankDrive(0.6, 0.55);
+    		RobotMap.driveTrain.tankDrive(0.6, 0.6);
     	}
     	
 	}

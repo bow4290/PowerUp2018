@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Ultrasonic;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 //import edu.wpi.first.wpilibj.drive.MecanumDrive;
 
@@ -27,10 +29,10 @@ public class RobotMap {
 	public static SpeedController driveTrainRightMotorFront;
 	public static SpeedController driveTrainLeftMotorBack;
 	//Remove Cube Grab motor when not testing
-	public static Spark cubeGrabMotor;
-	public static Spark cubeArmMotor;
-	public static Talon cubeForkliftMotor;
-	public static Talon climberMotor;
+//	public static Spark cubeGrabMotor;
+//	public static Spark cubeArmMotor;
+	public static VictorSP cubeForkliftMotor;
+	public static VictorSP climberMotor;
 	public static ADXRS450_Gyro turningGyro;
 	public static Solenoid gearShiftSolenoid;
 	public static Solenoid cubeGrabSolenoid;
@@ -45,27 +47,23 @@ public class RobotMap {
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
 	
-	//Wire 4 Connect to 0
-	//Wire 5 Connect to 1
-	//Wire 3 connect to 2
-	//Wire 1 connect to 3
 
 	public static void init() {
 
-		driveTrainLeftMotorFront =  new Talon(0); //Changed from 5/0 PowerUpBot
-//		driveTrainLeftMotorBack = new Talon(2); //changed from 2
-		driveTrainRightMotorFront = new Talon(1);//Changed from 4/1 PowerUpBot
-//		driveTrainRightMotorBack = new Talon(3); //changed from 3
-		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront);
-		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront);
+		driveTrainLeftMotorFront =  new Spark(2);
+		driveTrainLeftMotorBack = new Spark(3);
+		driveTrainRightMotorFront = new Spark(0);
+		driveTrainRightMotorBack = new Spark(1);
+		SpeedControllerGroup rightSide = new SpeedControllerGroup(driveTrainRightMotorFront, driveTrainRightMotorBack);
+		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront, driveTrainLeftMotorBack);
 		driveTrain = new DifferentialDrive(leftSide, rightSide);
 		turningGyro = new ADXRS450_Gyro();
-		cubeGrabSolenoid = new Solenoid(5);
-		gearShiftSolenoid = new Solenoid(4);
+		cubeGrabSolenoid = new Solenoid(2, 3);
+		gearShiftSolenoid = new Solenoid(0, 1);
 //		cubeGrabMotor = new Spark(3);
 //		cubeArmMotor = new Spark(1);
-		cubeForkliftMotor = new Talon(2);
-		climberMotor = new Talon(3);
+		cubeForkliftMotor = new VictorSP(5);
+		climberMotor = new VictorSP(4);
 		sonarSensor = new AnalogInput(1);
 	
 	}

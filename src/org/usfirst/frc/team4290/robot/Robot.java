@@ -23,9 +23,7 @@ import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightSwitch;
 import org.usfirst.frc.team4290.robot.commands.AutoRightCrossBaseline;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
-import org.usfirst.frc.team4290.robot.subsystems.CubeArmSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
-import org.usfirst.frc.team4290.robot.subsystems.CubeGrabSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team4290.robot.subsystems.SolenoidSubsystem;
 
@@ -42,8 +40,6 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static RobotMap robotMap;
 	public static DriveTrain driveTrain;
-	public static CubeGrabSubsystem cubeGrab;
-	public static CubeArmSubsystem cubeArm;
 	public static CubeForkliftSubsystem cubeForklift;
 	public static ClimberSubsystem climber;
 	public static SolenoidSubsystem pneumatics;
@@ -60,8 +56,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		driveTrain = new DriveTrain();
-		cubeGrab = new CubeGrabSubsystem();
-		cubeArm = new CubeArmSubsystem();
 		cubeForklift = new CubeForkliftSubsystem();
 		climber = new ClimberSubsystem();
 		pneumatics = new SolenoidSubsystem();
