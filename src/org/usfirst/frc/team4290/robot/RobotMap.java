@@ -3,6 +3,7 @@ package org.usfirst.frc.team4290.robot;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
 //import edu.wpi.first.wpilibj.RobotDrive;;
 import edu.wpi.first.wpilibj.Spark;
@@ -34,8 +35,8 @@ public class RobotMap {
 	public static VictorSP cubeForkliftMotor;
 	public static VictorSP climberMotor;
 	public static ADXRS450_Gyro turningGyro;
-	public static Solenoid gearShiftSolenoid;
-	public static Solenoid cubeGrabSolenoid;
+	public static DoubleSolenoid gearShiftSolenoid;
+	public static DoubleSolenoid cubeGrabSolenoid;
 	public static AnalogInput sonarSensor; 
 	// For example to map the left and right motors, you could define the
 	// following variables to use with your drivetrain subsystem.
@@ -58,8 +59,8 @@ public class RobotMap {
 		SpeedControllerGroup leftSide = new SpeedControllerGroup(driveTrainLeftMotorFront, driveTrainLeftMotorBack);
 		driveTrain = new DifferentialDrive(leftSide, rightSide);
 		turningGyro = new ADXRS450_Gyro();
-		cubeGrabSolenoid = new Solenoid(2, 3);
-		gearShiftSolenoid = new Solenoid(0, 1);
+		cubeGrabSolenoid = new DoubleSolenoid(2, 3);
+		gearShiftSolenoid = new DoubleSolenoid(0, 1);
 //		cubeGrabMotor = new Spark(3);
 //		cubeArmMotor = new Spark(1);
 		cubeForkliftMotor = new VictorSP(5);
