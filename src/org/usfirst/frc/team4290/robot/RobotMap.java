@@ -65,7 +65,7 @@ public class RobotMap {
 //		cubeArmMotor = new Spark(1);
 		cubeForkliftMotor = new VictorSP(5);
 		climberMotor = new VictorSP(4);
-		sonarSensor = new AnalogInput(1);
+		sonarSensor = new AnalogInput(0);
 	
 	}
 }

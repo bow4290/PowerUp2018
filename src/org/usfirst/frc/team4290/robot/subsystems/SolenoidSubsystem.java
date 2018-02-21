@@ -18,17 +18,12 @@ public class SolenoidSubsystem extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void shiftGears() {
-    	
-    	if(RobotMap.gearShiftSolenoid.get() == Value.kForward)
-    	{
-    		RobotMap.gearShiftSolenoid.set(Value.kReverse);
-    	}
-    	else
-    	{
-    		RobotMap.gearShiftSolenoid.set(Value.kForward);
-    	}
-    	
+    public void shiftHigh() {
+    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
+    }
+    
+    public void shiftLow() {
+    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
     }
     
     public void openCubeGrabber() {

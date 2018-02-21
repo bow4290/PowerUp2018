@@ -27,7 +27,8 @@ public class OI {
 	public JoystickButton cubeForkliftDownButton;
 //	public JoystickButton climbUpButton;
 	public JoystickButton climberButton;
-	public JoystickButton gearShiftButton;
+	public JoystickButton shiftHighButton;
+	public JoystickButton shiftLowButton;
 	
 	public XboxController mainXBoxController;
 	public XboxController secondaryXBoxController;
@@ -48,12 +49,13 @@ public class OI {
 		cubeForkliftUpButton = new JoystickButton(mainXBoxController, 4);
 		cubeForkliftDownButton = new JoystickButton(mainXBoxController, 3);
 		
-		gearShiftButton = new JoystickButton(mainXBoxController, 1);
+		shiftHighButton = new JoystickButton(mainXBoxController, 1);
+		shiftLowButton = new JoystickButton(mainXBoxController, 2);
 //		testGyroDELETE = new JoystickButton(xBoxController, 1);
 
 		//Cube Grabbing
-		cubeDropButton.whenPressed(new CubeDropCommand());
-		cubeGrabButton.whenPressed(new CubeGrabCommand());
+		cubeDropButton.whileHeld(new CubeDropCommand());
+		cubeGrabButton.whileHeld(new CubeGrabCommand());
 //		
 //		climbUpButton.whileHeld(new ClimbUpCommand());
 		climberButton.whileHeld(new ClimbDownCommand());
@@ -61,7 +63,8 @@ public class OI {
 		cubeForkliftUpButton.whileHeld(new ForkliftRaiseCommand());
 		cubeForkliftDownButton.whileHeld(new ForkliftLowerCommand());
 		cubeForkliftDownButton.whenReleased(new ForkliftHoldCommand());
-		gearShiftButton.whenPressed(new GearShiftCommand());
+		shiftHighButton.whenPressed(new GearShiftCommand(true));
+		shiftLowButton.whenPressed(new GearShiftCommand(false));
 //		testGyroDELETE.whileHeld(new MoveForwardCommand());
 	}
 }
