@@ -19,17 +19,17 @@ public class CubeForkliftSubsystem extends Subsystem {
     
     public void forkliftUp()
     {
-    	RobotMap.cubeForkliftMotor.set(0.7);
+    	RobotMap.cubeForkliftMotor.set(0.65);
     }
     
     public void forkliftDown()
     {
-    	RobotMap.cubeForkliftMotor.set(-0.7);
+    	RobotMap.cubeForkliftMotor.set(-0.65);
     }
     
     public void forkliftHold()
     {
-    	RobotMap.cubeForkliftMotor.set(0.2);
+    	RobotMap.cubeForkliftMotor.set(0.1);
     }
     
     public void stop()

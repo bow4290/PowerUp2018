@@ -11,6 +11,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import org.usfirst.frc.team4290.robot.commands.AutoLeftCrossBaseline;
 import org.usfirst.frc.team4290.robot.commands.AutoLeftScoreScale;
 import org.usfirst.frc.team4290.robot.commands.AutoLeftScoreSwitch;
@@ -261,6 +264,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+    	double sonarDistance = RobotMap.sonarSensor.getAverageVoltage() * 40.69;
+    	SmartDashboard.putNumber("sonar distance", sonarDistance);
 		
 //		SmartDashboard.putNumber("Gyro Periodic", RobotMap.turningGyro.getAngle());
 	}
@@ -272,4 +277,34 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
+	
+	private ArrayList<Double> sonarValues = new ArrayList<>(); 
+	
+
+	private double getAverageDistance() {
+    	SmartDashboard.putNumber("Avg array size", sonarValues.size());
+    	if (sonarValues.size() == 15) {
+    		sonarValues.sort(Comparator.reverseOrder());
+    		sonarValues.remove(0);
+    		sonarValues.remove(0);
+    		sonarValues.remove(0);
+//    		sonarValues.remove(0);
+    		sonarValues.remove(sonarValues.size() - 1);
+    		sonarValues.remove(sonarValues.size() - 1);
+    		sonarValues.remove(sonarValues.size() - 1);
+//    		sonarValues.remove(sonarValues.size() - 1);
+
+    		
+    		double average = 0.0;
+    		for (Double i : sonarValues) {
+    			average += i;
+    		}
+    		average = average/sonarValues.size();
+        	SmartDashboard.putNumber("Sonar avg distance", average);
+    		sonarValues.clear();
+
+    		return average;
+    	}
+    	return 100.0;
+    }
 }

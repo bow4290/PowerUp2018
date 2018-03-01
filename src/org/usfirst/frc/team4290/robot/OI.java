@@ -25,8 +25,8 @@ public class OI {
 	public JoystickButton cubeGrabButton;
 	public JoystickButton cubeForkliftUpButton;
 	public JoystickButton cubeForkliftDownButton;
-//	public JoystickButton climbUpButton;
-	public JoystickButton climberButton;
+	public JoystickButton climbUpButton;
+//	public JoystickButton climberButton;
 	public JoystickButton shiftHighButton;
 	public JoystickButton shiftLowButton;
 	
@@ -35,30 +35,34 @@ public class OI {
 	{
 		mainXBoxController = new XboxController(0);
 		secondaryXBoxController = new XboxController(1);
-		cubeDropButton = new JoystickButton(mainXBoxController, 9);
-		cubeGrabButton = new JoystickButton(mainXBoxController, 10);
+		cubeDropButton = new JoystickButton(secondaryXBoxController, 9);
+		cubeGrabButton = new JoystickButton(secondaryXBoxController, 10);
+//		cubeDropButton = new JoystickButton(mainXBoxController, 9);
+//		cubeGrabButton = new JoystickButton(mainXBoxController, 10);
 //		Uncomment for competition
 //		cubeForkliftUpButton = new JoystickButton(secondaryXBoxController, 1);
 //		cubeForkliftDownButton = new JoystickButton(secondaryXBoxController, 0);
 		
 //		Climber
-//		climbUpButton = new JoystickButton(mainXBoxController, 6);
-		climberButton = new JoystickButton(mainXBoxController, 5);
+		climbUpButton = new JoystickButton(secondaryXBoxController, 6);
+//		climberButton = new JoystickButton(mainXBoxController, 5);
 		
 //		Uncomment for testing
-		cubeForkliftUpButton = new JoystickButton(mainXBoxController, 4);
-		cubeForkliftDownButton = new JoystickButton(mainXBoxController, 3);
+//		cubeForkliftUpButton = new JoystickButton(mainXBoxController, 4);
+//		cubeForkliftDownButton = new JoystickButton(mainXBoxController, 3);
+		cubeForkliftUpButton = new JoystickButton(secondaryXBoxController, 4);
+		cubeForkliftDownButton = new JoystickButton(secondaryXBoxController, 3);
 		
-		shiftHighButton = new JoystickButton(mainXBoxController, 1);
-		shiftLowButton = new JoystickButton(mainXBoxController, 2);
+		shiftHighButton = new JoystickButton(mainXBoxController, 2);
+		shiftLowButton = new JoystickButton(mainXBoxController, 1);
 //		testGyroDELETE = new JoystickButton(xBoxController, 1);
 
 		//Cube Grabbing
 		cubeDropButton.whileHeld(new CubeDropCommand());
 		cubeGrabButton.whileHeld(new CubeGrabCommand());
 //		
-//		climbUpButton.whileHeld(new ClimbUpCommand());
-		climberButton.whileHeld(new ClimbDownCommand());
+		climbUpButton.whileHeld(new ClimbUpCommand());
+//		climberButton.whileHeld(new ClimbDownCommand());
 		
 		cubeForkliftUpButton.whileHeld(new ForkliftRaiseCommand());
 		cubeForkliftDownButton.whileHeld(new ForkliftLowerCommand());
