@@ -16,11 +16,11 @@ public class AutoMiddleCrossBaselineOnRight extends CommandGroup {
     	// TODO: Add Sequences
     	addSequential(new MoveForwardCommand(12.0), 0.5);
     	// Add Right Turn Sequence
-    	addSequential(new TurnRightCommand());
+    	addSequential(new TurnRightCommand(90.0));
     	// Add Move Forward Sequence
     	addSequential(new MoveForwardCommand(12.0), 2.5);
     	// Add Turn Left Sequence
-    	addSequential(new TurnLeftCommand());
+    	addSequential(new TurnLeftCommand(90.0));
     	// Add Move Forward Sequence
     	addSequential(new MoveForwardCommand(0.0), 3.5);
 

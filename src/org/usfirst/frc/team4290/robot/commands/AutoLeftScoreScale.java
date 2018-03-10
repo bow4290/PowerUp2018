@@ -24,7 +24,7 @@ public class AutoLeftScoreScale extends CommandGroup {
     	// Add Raise Forklift Parallel
     	addParallel(new ForkliftRaiseCommand(), 3.0);
     	// Add Turn Right Sequence
-    	addSequential(new TurnRightCommand());
+    	addSequential(new TurnRightCommand(90.0));
     	// Add Move Forward Parallel
     	addSequential(new MoveForwardCommand(0.0), 2.0);
     	// Add Drop Cube Sequence

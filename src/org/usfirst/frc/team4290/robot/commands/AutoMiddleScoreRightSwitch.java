@@ -13,31 +13,45 @@ public class AutoMiddleScoreRightSwitch extends CommandGroup {
         //      addSequential(new Command2());
         // these will run in order.
     	//TODO
-    	//cube grab command parallel
+//    	//cube grab command parallel
+//    	addSequential(new CubeGrabCommand(), 1.0);
+//    	//moveForward command parallel
+//    	addSequential(new MoveForwardCommand(0.0), 0.5);
+//    	// right turn command sequential
+//    	addSequential(new TurnRightCommand(), 1.0);
+//    	//move forward command sequential
+//    	addSequential(new MoveForwardCommand(12.0), 2.5);
+//    	//left turn command sequential
+//    	addSequential(new TurnLeftCommand());
+//    	//move forward command sequential
+//    	addParallel(new MoveForwardCommand(6.0), 2.35);
+//    	addParallel(new ForkliftRaiseCommand(), 2.0);
+//    	//Left turn command sequential
+//    	addSequential(new TurnLeftCommand());
+//    	//raise fork lift command parallel
+//    	addParallel(new ForkliftRaiseCommand(), 1.0);
+//    	//move forward command parallel
+//    	addParallel(new MoveForwardCommand(0.0), 1.0);
+//    	//drop cube command sequential
+//    	addSequential(new CubeDropCommand(), 1.0);
+//    	//move backwards command parallel
+//    	addParallel(new MoveBackwardCommand(), 1.0);
+//    	//lower fork lift command parallel
+//    	addParallel(new ForkliftLowerCommand(), 5.0);
+    	
     	addSequential(new CubeGrabCommand(), 1.0);
-    	//moveForward command parallel
-    	addSequential(new MoveForwardCommand(0.0), 0.5);
-    	// right turn command sequential
-    	addSequential(new TurnRightCommand(), 1.0);
-    	//move forward command sequential
-    	addSequential(new MoveForwardCommand(12.0), 2.5);
-    	//left turn command sequential
-    	addSequential(new TurnLeftCommand());
-    	//move forward command sequential
-    	addParallel(new MoveForwardCommand(6.0), 2.35);
+    	addSequential(new TurnLeftCommand(45.0));
+    	
+    	addParallel(new MoveForwardCommand(0.0), 4.0);
     	addParallel(new ForkliftRaiseCommand(), 2.0);
-    	//Left turn command sequential
-    	addSequential(new TurnLeftCommand());
-    	//raise fork lift command parallel
-    	addParallel(new ForkliftRaiseCommand(), 1.0);
-    	//move forward command parallel
-    	addParallel(new MoveForwardCommand(0.0), 1.0);
-    	//drop cube command sequential
+    	
+    	addSequential(new TurnRightCommand(45.0));
+    	
+    	addSequential(new MoveForwardCommand(0.0), 1.0);
+    	
     	addSequential(new CubeDropCommand(), 1.0);
-    	//move backwards command parallel
-    	addParallel(new MoveBackwardCommand(), 1.0);
-    	//lower fork lift command parallel
-    	addParallel(new ForkliftLowerCommand(), 5.0);
+    	
+    	addSequential(new MoveBackwardCommand(), 1.0);
 
         // To run multiple commands at the same time,
         // use addParallel()

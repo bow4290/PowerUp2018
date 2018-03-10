@@ -19,7 +19,7 @@ public class AutoLeftScoreSwitch extends CommandGroup {
     	// Add Move Forward Sequence
     	addSequential(new MoveForwardCommand(0.0), 3.75);
     	// Add Turn Right Sequence
-    	addSequential(new TurnRightCommand());
+    	addSequential(new TurnRightCommand(90.0));
     	// Add Move Forward Parallel
     	addParallel(new MoveForwardCommand(0.0), 2.0);
     	// Add Raise Forklift Parallel

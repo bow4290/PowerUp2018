@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TurnLeftCommand extends Command {
 	
+	private double angle = 0.0;
 //	private static double const 90DEGREES = 90.0;
 
-    public TurnLeftCommand() {
+    public TurnLeftCommand(double angle) {
+    	this.angle = angle;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -33,7 +35,7 @@ public class TurnLeftCommand extends Command {
     protected boolean isFinished() {
 //    	SmartDashboard.putNumber("Left Turn Gyro Execute Value", RobotMap.turningGyro.getAngle());
 //    	SmartDashboard.putBoolean("Left IsFinished Check", RobotMap.turningGyro.getAngle() < -90);
-    	return RobotMap.turningGyro.getAngle() < -85;
+    	return RobotMap.turningGyro.getAngle() < -angle;
     }
 
     // Called once after isFinished returns true

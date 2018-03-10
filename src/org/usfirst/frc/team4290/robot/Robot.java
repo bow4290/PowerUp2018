@@ -264,8 +264,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-    	double sonarDistance = RobotMap.sonarSensor.getAverageVoltage() * 40.69;
-    	SmartDashboard.putNumber("sonar distance", sonarDistance);
+    	double sonarDistance = RobotMap.sonarSensor.getVoltage() * 40.69;
+    	sonarValues.add(sonarDistance);
+    	SmartDashboard.putNumber("distance", sonarDistance);
+    	SmartDashboard.putNumber("sonar teleop distance", getAverageDistance());
 		
 //		SmartDashboard.putNumber("Gyro Periodic", RobotMap.turningGyro.getAngle());
 	}
@@ -283,7 +285,7 @@ public class Robot extends IterativeRobot {
 
 	private double getAverageDistance() {
     	SmartDashboard.putNumber("Avg array size", sonarValues.size());
-    	if (sonarValues.size() == 15) {
+    	if (sonarValues.size() > 15) {
     		sonarValues.sort(Comparator.reverseOrder());
     		sonarValues.remove(0);
     		sonarValues.remove(0);
@@ -300,7 +302,7 @@ public class Robot extends IterativeRobot {
     			average += i;
     		}
     		average = average/sonarValues.size();
-        	SmartDashboard.putNumber("Sonar avg distance", average);
+        	SmartDashboard.putNumber("Sonar avg distance", average+1);
     		sonarValues.clear();
 
     		return average;

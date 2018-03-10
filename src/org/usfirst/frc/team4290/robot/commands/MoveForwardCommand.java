@@ -33,16 +33,16 @@ public class MoveForwardCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	Robot.driveTrain.driveForward();
+    	Robot.driveTrain.driveForward();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	double sonarDistance = RobotMap.sonarSensor.getAverageVoltage() * 40.69;
-    	SmartDashboard.putNumber("sonar distance", sonarDistance);
 //    	SmartDashboard.putNumber("stop distance", distance);
     	sonarValues.add(sonarDistance);
     	double avgDistance = getAverageDistance();
+    	SmartDashboard.putNumber("sonar distance", avgDistance);
     	
     	if (distance == 0.0 ) {
     		return false;
@@ -63,7 +63,7 @@ public class MoveForwardCommand extends Command {
     
     private double getAverageDistance() {
     	SmartDashboard.putNumber("Avg array size", sonarValues.size());
-    	if (sonarValues.size() == 15) {
+    	if (sonarValues.size() == 10) {
     		sonarValues.sort(Comparator.reverseOrder());
     		sonarValues.remove(0);
     		sonarValues.remove(0);
