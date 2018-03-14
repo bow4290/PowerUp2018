@@ -26,8 +26,8 @@ public class DriveTrain extends Subsystem {
     
     public void takeJoystickInputs(XboxController xBoxController) {
     	
-    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.04), -xBoxController.getX(Hand.kRight) * 0.8);
-//    	RobotMap.driveTrain.arcadeDrive(xBoxController.getY(Hand.kLeft), xBoxController.getX(Hand.kLeft));
+//    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.04), -xBoxController.getX(Hand.kRight) * 0.9);
+    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.04), -xBoxController.getX(Hand.kLeft));
     	
     }
     
