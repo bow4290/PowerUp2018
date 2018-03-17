@@ -15,12 +15,12 @@ public class AutoMiddleScoreLeftScale extends CommandGroup {
     	
     	addSequential(new TurnLeftCommand(85.0));
     	
-    	addSequential(new MoveForwardCommand(40.0));
+    	addSequential(new MoveForwardCommand(40.0), 3.75);
     	
     	addSequential(new TurnRightCommand(85.0));
     	
     	addParallel(new ForkliftRaiseCommand(), 5.0);
-    	addParallel(new MoveForwardCommand(10.0), 8.0);
+    	addParallel(new MoveForwardCommand(0.0), 8.0);
     	
     	addSequential(new TurnRightCommand(90.0));
     	

@@ -35,8 +35,8 @@ public class OI {
 	{
 		mainXBoxController = new XboxController(0);
 		secondaryXBoxController = new XboxController(1);
-		cubeDropButton = new JoystickButton(secondaryXBoxController, 9);
-		cubeGrabButton = new JoystickButton(secondaryXBoxController, 10);
+		cubeDropButton = new JoystickButton(secondaryXBoxController, 1);
+		cubeGrabButton = new JoystickButton(secondaryXBoxController, 2);
 //		cubeDropButton = new JoystickButton(mainXBoxController, 9);
 //		cubeGrabButton = new JoystickButton(mainXBoxController, 10);
 //		Uncomment for competition
@@ -53,8 +53,8 @@ public class OI {
 		cubeForkliftUpButton = new JoystickButton(secondaryXBoxController, 4);
 		cubeForkliftDownButton = new JoystickButton(secondaryXBoxController, 3);
 		
-		shiftHighButton = new JoystickButton(mainXBoxController, 2);
-		shiftLowButton = new JoystickButton(mainXBoxController, 1);
+		shiftHighButton = new JoystickButton(mainXBoxController, 6);
+		shiftLowButton = new JoystickButton(mainXBoxController, 5);
 //		testGyroDELETE = new JoystickButton(xBoxController, 1);
 
 		//Cube Grabbing
