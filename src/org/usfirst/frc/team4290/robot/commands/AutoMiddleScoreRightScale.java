@@ -12,23 +12,23 @@ public class AutoMiddleScoreRightScale extends CommandGroup {
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	addSequential(new CubeGrabCommand(), 1.0);
+    	addSequential(new CubeDropCommand(), 1.0);
     	
-    	addSequential(new MoveForwardCommand(12.0), 0.5);
+    	addSequential(new AutoMoveForwardCommand(), 1.0);
     	
-    	addSequential(new TurnRightCommand(90.0));
+    	addSequential(new AutoTurnRightCommand(), 2.0);
     	
-    	addSequential(new MoveForwardCommand(12.0), 2.5);
+    	addSequential(new AutoMoveForwardCommand(), 2.5);
     	
-    	addSequential(new TurnLeftCommand(90.0));
+    	addSequential(new AutoTurnLeftCommand(), 2.0);
     	
     	addParallel(new ForkliftRaiseCommand(), 5.0);
-    	addParallel(new MoveForwardCommand(6.0), 5.0);
+    	addParallel(new AutoMoveForwardCommand(), 5.0);
     	
-    	addSequential(new TurnLeftCommand(90.0));
+    	addSequential(new AutoTurnLeftCommand(), 2.0);
     	
 //    	addSequential(new MoveForwardCommand(0.0), 1.0);
-    	addSequential(new CubeDropCommand(), 1.0);
+    	addSequential(new CubeGrabCommand(), 1.0);
     	
     	addParallel(new MoveBackwardCommand(), 1.0);
     	addParallel(new ForkliftLowerCommand(), 5.0);

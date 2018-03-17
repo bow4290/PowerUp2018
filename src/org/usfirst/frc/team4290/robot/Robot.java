@@ -76,6 +76,7 @@ public class Robot extends IterativeRobot {
 		scoreChooser.addObject("Cross baseline", "baseline");
 		scoreChooser.addObject("Score scale", "scale");
 		SmartDashboard.putData("Score", scoreChooser);
+		
 	}
 
 	/**
@@ -106,6 +107,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+//		autonomousCommand = new AutoLeftCrossBaseline();
 //		Get field data
 		String  gameData = DriverStation.getInstance().getGameSpecificMessage();
 		SendableChooser<String> position = (SendableChooser<String>) SmartDashboard.getData("Start Position");

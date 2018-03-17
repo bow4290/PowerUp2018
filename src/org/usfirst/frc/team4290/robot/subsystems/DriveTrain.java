@@ -100,7 +100,7 @@ public class DriveTrain extends Subsystem {
     	else
     	{
     		SmartDashboard.putNumber("Drive Forward Angle", angle);
-    		RobotMap.driveTrain.tankDrive(0.6, 0.6);
+    		RobotMap.driveTrain.tankDrive(-0.6, -0.6);
     	}
     	
 	}
@@ -110,5 +110,9 @@ public class DriveTrain extends Subsystem {
 		RobotMap.driveTrain.arcadeDrive(-0.6, 0);
 	}
 	
+	public void testDriveForward()
+	{
+		RobotMap.driveTrain.arcadeDrive(-0.75, 0);
+	}
 }
 

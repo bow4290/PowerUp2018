@@ -30,6 +30,7 @@ public class CubeDropCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.pneumatics.openCubeGrabber();
     }
 
     // Called when another command which requires one or more of the same
