@@ -19,19 +19,19 @@ public class SolenoidSubsystem extends Subsystem {
     }
     
     public void shiftHigh() {
-    	RobotMap.gearShiftSolenoid.set(Value.kReverse);
-    }
-    
-    public void shiftLow() {
     	RobotMap.gearShiftSolenoid.set(Value.kForward);
     }
     
+    public void shiftLow() {
+    	RobotMap.gearShiftSolenoid.set(Value.kReverse);
+    }
+    
     public void openCubeGrabber() {
-    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
+    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
     }
     
     public void closedCubeGrabber() {
-    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
+    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
 
     }
 }

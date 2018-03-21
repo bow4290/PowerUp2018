@@ -40,18 +40,19 @@ public class AutoMiddleScoreLeftSwitch extends CommandGroup {
 //    	addParallel(new ForkliftLowerCommand(), 1.0);
     	
     	addSequential(new CubeGrabCommand(), 1.0);
+    	
     	addSequential(new TurnLeftCommand(45.0));
     	
     	addParallel(new MoveForwardCommand(0.0), 4.0);
-    	addParallel(new ForkliftRaiseCommand(), 2.0);
+//    	addParallel(new ForkliftRaiseCommand(), 2.0);
     	
-    	addSequential(new TurnRightCommand(45.0));
+//    	addSequential(new TurnRightCommand(45.0));
+//    	
+//    	addSequential(new MoveForwardCommand(24.0));
     	
-    	addSequential(new MoveForwardCommand(24.0));
-    	
-    	addSequential(new CubeDropCommand(), 1.0);
-    	
-    	addSequential(new MoveBackwardCommand(), 1.0);
+//    	addSequential(new CubeDropCommand(), 1.0);
+//    	
+//    	addSequential(new MoveBackwardCommand(), 1.0);
     	
 //    	addSequential(new MoveForwardCommand(), 4.0);
     	
