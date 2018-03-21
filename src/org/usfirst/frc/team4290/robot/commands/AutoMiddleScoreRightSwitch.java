@@ -39,19 +39,32 @@ public class AutoMiddleScoreRightSwitch extends CommandGroup {
 //    	//lower fork lift command parallel
 //    	addParallel(new ForkliftLowerCommand(), 5.0);
     	
-    	addSequential(new CubeDropCommand(), 1.0);
-    	addSequential(new AutoTurnLeftCommand(), 0.5);
+    	addSequential(new CubeGrabCommand(), 1.0);
     	
+    	//addSequential(new MoveForwardCommand(0.0), 1.0);
+    	addSequential(new AutoMoveForwardCommand(), 1.0);
+    	
+    	//addSequential(new TurnRightCommand(90.0));
+    	addSequential(new AutoTurnRightCommand(), 1.0);
+    	
+//    	addParallel(new CubeGrabCommand());
+//    	addParallel(new AutoTurnLeftCommand());
+//    	
+//    	addParallel(new MoveForwardCommand(24.0), 4.0);
     	addParallel(new AutoMoveForwardCommand(), 4.0);
     	addParallel(new ForkliftRaiseCommand(), 3.0);
     	
-    	addSequential(new AutoTurnRightCommand(), 1.0);
+    	//addSequential(new TurnLeftCommand(90.0);
+    	addSequential(new AutoTurnLeftCommand(), 1.0);
     	
+    	//addSequential(new MoveForwardCommand(0.0), 2.0);
     	addSequential(new AutoMoveForwardCommand(), 2.0);
-    	
-    	addSequential(new CubeGrabCommand(), 1.0);
-    	
+//    	
+    	addSequential(new CubeDropCommand());
+//    	
     	addSequential(new MoveBackwardCommand(), 1.0);
+    	
+//    	addSequential(new MoveForwardCommand(), 4.0);
 
         // To run multiple commands at the same time,
         // use addParallel()

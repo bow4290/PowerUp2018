@@ -112,7 +112,7 @@ public class DriveTrain extends Subsystem {
 	
 	public void testDriveForward()
 	{
-		RobotMap.driveTrain.arcadeDrive(-0.75, 0);
+		RobotMap.driveTrain.arcadeDrive(-0.6, 0);
 	}
 }
 

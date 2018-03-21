@@ -27,11 +27,11 @@ public class SolenoidSubsystem extends Subsystem {
     }
     
     public void openCubeGrabber() {
-    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
+    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
     }
     
     public void closedCubeGrabber() {
-    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
+    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
 
     }
 }

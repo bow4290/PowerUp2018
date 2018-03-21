@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4290.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
@@ -23,7 +24,9 @@ import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftSwitch;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoMoveForwardAndRaise;
 import org.usfirst.frc.team4290.robot.commands.AutoRightCrossBaseline;
+import org.usfirst.frc.team4290.robot.commands.AutoStraightIntoSwitch;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
@@ -46,6 +49,7 @@ public class Robot extends IterativeRobot {
 	public static CubeForkliftSubsystem cubeForklift;
 	public static ClimberSubsystem climber;
 	public static SolenoidSubsystem pneumatics;
+	public static CameraServer server;
 	
 	Command autonomousCommand;
 	SendableChooser<String> positionChooser;
@@ -62,6 +66,9 @@ public class Robot extends IterativeRobot {
 		cubeForklift = new CubeForkliftSubsystem();
 		climber = new ClimberSubsystem();
 		pneumatics = new SolenoidSubsystem();
+		
+		CameraServer.getInstance().startAutomaticCapture();
+		
 		RobotMap.init();
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 //		// chooser.addObject("My Auto", new MyAutoCommand());
@@ -122,9 +129,11 @@ public class Robot extends IterativeRobot {
 
 				if (gameData.charAt(0) == 'L') {
 					autonomousCommand = new AutoMiddleScoreLeftSwitch();
+//					autonomousCommand = new AutoMoveForwardAndRaise();
 				}
 				else {
 					autonomousCommand = new AutoMiddleScoreRightSwitch();
+//					autonomousCommand = new AutoStraightIntoSwitch();
 				}
 				break;
 			case "baseline":
@@ -160,13 +169,13 @@ public class Robot extends IterativeRobot {
 				SmartDashboard.putString("Case L switch", "Case L switch");
 
 				if (gameData.charAt(0) == 'L') {
-					autonomousCommand = new AutoLeftScoreSwitch();
+					autonomousCommand = new AutoStraightIntoSwitch();
 				}
-				else if (gameData.charAt(1) == 'L'){
-					autonomousCommand = new AutoLeftScoreScale();
-				}
+//				else if (gameData.charAt(1) == 'L'){
+//					autonomousCommand = new AutoLeftScoreScale();
+//				}
 				else {
-					autonomousCommand = new AutoLeftCrossBaseline();
+					autonomousCommand = new AutoMoveForwardAndRaise();
 				}
 				break;
 			case "baseline":
@@ -195,6 +204,16 @@ public class Robot extends IterativeRobot {
 			switch (score.getSelected().toString()) {
 			case "switch":
 				SmartDashboard.putString("Case R switch", "Case R switch");
+
+				if (gameData.charAt(0) == 'R') {
+					autonomousCommand = new AutoStraightIntoSwitch();
+				}
+//				else if (gameData.charAt(1) == 'L'){
+//					autonomousCommand = new AutoLeftScoreScale();
+//				}
+				else {
+					autonomousCommand = new AutoMoveForwardAndRaise();
+				}
 				break;
 			case "baseline":
 				SmartDashboard.putString("Case R baseline", "Case R baseline");

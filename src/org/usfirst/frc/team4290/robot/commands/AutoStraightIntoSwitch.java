@@ -5,22 +5,26 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class AutoRightCrossBaseline extends CommandGroup {
+public class AutoStraightIntoSwitch extends CommandGroup {
 
-    public AutoRightCrossBaseline() {
+    public AutoStraightIntoSwitch() {
         // Add Commands here:
+    	addSequential(new CubeGrabCommand(), 1.0);
+    	
+//    	addParallel(new ForkliftHoldCommand(), 5.0);
+    	
+    	//addSequential(new MoveForwardCommand(24.0), 3.0);
+    	addSequential(new AutoMoveForwardCommand(), 3.0);
+    	
+    	addSequential(new ForkliftRaiseCommand(), 2.0);
+    	
+    	addSequential(new CubeDropCommand(), 1.0);
+    	
+    	addSequential(new MoveBackwardCommand(), 1.0);
+    	
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
         // these will run in order.
-    	
-    	// TODO Sequence to add:
-    	// Add Sequential Drive Forward
-    	addSequential(new CubeGrabCommand(), 1.0);
-    	
-    	//addSequential(new MoveForwardCommand(0.0), 5.0);
-    	addSequential(new AutoMoveForwardCommand(), 5.0);
-    	
-
 
         // To run multiple commands at the same time,
         // use addParallel()

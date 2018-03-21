@@ -15,21 +15,24 @@ public class AutoRightScoreSwitch extends CommandGroup {
     	
     	// TODO: Add Sequence
     	// Add Grab Cube Sequence
-    	addSequential(new CubeDropCommand(), 1.0);
+    	addSequential(new CubeGrabCommand(), 1.0);
     	// Add Move Forward Sequence
+    	//addSequential(new MoveForwardCommand(0.0), 3.75);
     	addSequential(new AutoMoveForwardCommand(), 3.75);
-    	// Add Turn Left Sequence
-    	addSequential(new AutoTurnLeftCommand(), 1.0);
+    	// Add Turn Right Sequence
+    	//addSequential(new TurnLeftCommand(90));
+    	addSequential(new AutoTurnLeftCommand(), 2.0);
     	// Add Move Forward Parallel
+    	//addparallel(new MoveForwardCommand(24.0), 4.0);
     	addParallel(new AutoMoveForwardCommand(), 2.0);
     	// Add Raise Forklift Parallel
     	addParallel(new ForkliftRaiseCommand(), 3.0);
-//    	 Add Drop Cube Sequence
-    	addSequential(new CubeGrabCommand(), 1.0);
+    	// Add Drop Cube Sequence
+    	addSequential(new CubeDropCommand(), 1.0);
     	// Add Move Backwards Parallel
-    	addParallel(new MoveBackwardCommand(), 1.0);
+    	addSequential(new MoveBackwardCommand(), 1.0);
     	// Add Lower Forklift Parallel
-    	addParallel(new ForkliftLowerCommand(), 2.0);
+    	addSequential(new ForkliftLowerCommand(), 1.0);
 
         // To run multiple commands at the same time,
         // use addParallel()
