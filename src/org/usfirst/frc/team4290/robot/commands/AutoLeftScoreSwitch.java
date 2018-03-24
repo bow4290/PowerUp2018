@@ -17,13 +17,12 @@ public class AutoLeftScoreSwitch extends CommandGroup {
     	// Add Grab Cube Sequence
     	addSequential(new CubeGrabCommand(), 1.0);
     	// Add Move Forward Sequence
-    	addSequential(new MoveForwardCommand(0.0), 3.75);
+    	addParallel(new ForkliftRaiseCommand(), 6.0);
+    	addParallel(new MoveForwardCommand(0.0), 3.0);
     	// Add Turn Right Sequence
     	addSequential(new TurnRightCommand(90.0));
     	// Add Move Forward Parallel
-    	addParallel(new MoveForwardCommand(0.0), 2.0);
-    	// Add Raise Forklift Parallel
-    	addParallel(new ForkliftRaiseCommand(), 1.0);
+    	addSequential(new MoveForwardCommand(0.0), 0.5);
     	// Add Drop Cube Sequence
     	addSequential(new CubeDropCommand(), 1.0);
     	// Add Move Backwards Parallel
