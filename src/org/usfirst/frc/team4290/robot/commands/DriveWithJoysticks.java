@@ -21,6 +21,7 @@ public class DriveWithJoysticks extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//Get Joystick Input from Main Driver Controller
     	Robot.driveTrain.takeJoystickInputs(Robot.oi.mainXBoxController);
     }
 

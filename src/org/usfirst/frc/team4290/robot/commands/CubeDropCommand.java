@@ -8,8 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class CubeDropCommand extends Command {
+	private String arm = "";
+	
 
     public CubeDropCommand() {
+    	this.arm = arm;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -20,6 +23,18 @@ public class CubeDropCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+//    	if(Robot.LEFT_ARM.equals(arm))
+//    	{
+//    		Robot.pneumatics.openLeftGrabber();
+//    	}
+//    	else if(Robot.RIGHT_ARM.equals(arm))
+//    	{
+//    		Robot.pneumatics.openRightGrabber();
+//    	}
+//    	else
+//    	{
+//    		Robot.pneumatics.openCubeGrabber();
+//    	}    
     	Robot.pneumatics.openCubeGrabber();
     }
 

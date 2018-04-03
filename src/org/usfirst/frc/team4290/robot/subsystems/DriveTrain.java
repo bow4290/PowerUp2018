@@ -15,22 +15,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveTrain extends Subsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
 
     public void initDefaultCommand() {
     	setDefaultCommand(new DriveWithJoysticks());
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
     }
     
     public void takeJoystickInputs(XboxController xBoxController) {
-    	
-//    	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.04), -xBoxController.getX(Hand.kRight) * 0.9);
+    	//Get Joystick Inputs from Main Controller Joystick(s)
     	RobotMap.driveTrain.arcadeDrive(speedBuffer(xBoxController.getY(Hand.kLeft), 0.04), -xBoxController.getX(Hand.kLeft));
-    	
     }
     
+    //Speed Buffer
     private boolean isSlow = false;
     
     public void switchIsSlow()
@@ -62,43 +57,57 @@ public class DriveTrain extends Subsystem {
 		
 	}
 	
+	//Turn Right at Normal Speed
 	public void turnRight()
 	{
 		RobotMap.driveTrain.arcadeDrive(0.4, -0.9);
-//		RobotMap.driveTrain.tankDrive(-0.7, 0.7);
 	}
 	
+	//Turn Right at Fast Speed
+	public void turnRightFast()
+	{
+		RobotMap.driveTrain.arcadeDrive(0.4,  -1.0);
+	}
+	
+	//Turn Left at Normal Speed
 	public void turnLeft()
 	{
 		RobotMap.driveTrain.arcadeDrive(0.4, 0.9);
-//		RobotMap.driveTrain.tankDrive(0.7, -0.7);
 	}
 	
+	//Turn Left at Fast Speed
+	public void turnLeftFast()
+	{
+		RobotMap.driveTrain.arcadeDrive(0.4, 1.0);
+	}
+	
+	//Stop Driving
 	public void stop()
 	{
 		RobotMap.driveTrain.arcadeDrive(0, 0);
 	}
 	
+	//Drive Forward at Normal Speed
 	public void driveForward()
 	{
+		//Drift Corrector
 		double angle = RobotMap.turningGyro.getAngle();
     	SmartDashboard.putNumber("Original Angle", angle);
     	SmartDashboard.putNumber("Turn Angle", -angle * 0.05);
-//    	SmartDashboard.putNumber("Left Speed", 0.6 * (angle * 0.05));
-//    	SmartDashboard.putNumber("Right Speed" , 0.6 * (angle * 0.01));
 
-		
-//		RobotMap.driveTrain.arcadeDrive(0.6, -angle * 0.05);
+    	//If Too Far Right
     	if(angle > 2.0)
     	{
         	SmartDashboard.putNumber("Drift Right Angle", angle);
     		RobotMap.driveTrain.tankDrive(-0.7, -0.8);
     	}
+    	//If Too Far Left
     	else if(angle < -2.0)
     	{
         	SmartDashboard.putNumber("Drift Left Angle", angle);
     		RobotMap.driveTrain.tankDrive(-0.8, -0.7);
     	}
+    	//If Just Right
     	else
     	{
     		SmartDashboard.putNumber("Drive Forward Angle", angle);
@@ -107,10 +116,43 @@ public class DriveTrain extends Subsystem {
     	
 	}
 	
-	public void driveBackward()
+	//Drive Forward at Fast Speed
+	public void driveForwardFast()
 	{
-		RobotMap.driveTrain.arcadeDrive(0.6, 0);
+		double angle = RobotMap.turningGyro.getAngle();
+    	SmartDashboard.putNumber("Original Angle", angle);
+    	SmartDashboard.putNumber("Turn Angle", -angle * 0.05);
+
+    	//If Too Far Right
+    	if(angle > 2.0)
+    	{
+        	SmartDashboard.putNumber("Drift Right Angle", angle);
+    		RobotMap.driveTrain.tankDrive(-0.8, -0.9);
+    	}
+    	//If Too Far Left
+    	else if(angle < -2.0)
+    	{
+        	SmartDashboard.putNumber("Drift Left Angle", angle);
+    		RobotMap.driveTrain.tankDrive(-0.9, -0.8);
+    	}
+    	//If Just Right
+    	else
+    	{
+    		SmartDashboard.putNumber("Drive Forward Angle", angle);
+    		RobotMap.driveTrain.tankDrive(-0.85, -0.85);
+    	}
 	}
 	
+	//Drive Backwards at Normal Speed
+	public void driveBackward()
+	{
+		RobotMap.driveTrain.arcadeDrive(0.7, 0);
+	}
+	
+	//Drive Backwards at Fast Speed
+	public void driveBackwardFast()
+	{
+		RobotMap.driveTrain.arcadeDrive(0.8, 0);
+	}
 }
 

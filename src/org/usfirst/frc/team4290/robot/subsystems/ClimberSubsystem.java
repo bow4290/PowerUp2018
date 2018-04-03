@@ -9,24 +9,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ClimberSubsystem extends Subsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    //Climb Upwards
     public void climbUp()
     {
-    	RobotMap.climberMotor.set(0.9);
+    	RobotMap.climberMotor.set(1.0);
     }
     
+    //Climb Down
     public void climbDown()
     {
     	RobotMap.climberMotor.set(-0.9);
     }
     
+    //Stop Climb
     public void stop()
     {
     	RobotMap.climberMotor.set(0);

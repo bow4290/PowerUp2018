@@ -12,11 +12,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnRightCommand extends Command {
 
 	private double angle = 0.0;
+	private boolean fast = false;
 	
     public TurnRightCommand(double angle) {
     	this.angle = angle;
+    	this.fast = false;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    }
+    
+    public TurnRightCommand(double angle, boolean fast)
+    {
+    	this.angle = angle;
+    	this.fast = fast;
     }
 
     // Called just before this Command runs the first time
@@ -27,7 +35,15 @@ public class TurnRightCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.turnRight();
+    	
+    	if(fast)
+    	{
+    		Robot.driveTrain.turnRightFast();
+    	}
+    	else
+    	{
+        	Robot.driveTrain.turnRight();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

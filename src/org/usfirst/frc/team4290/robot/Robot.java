@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team4290.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Sendable;
@@ -24,6 +25,7 @@ import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftSwitch;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightSwitch;
 import org.usfirst.frc.team4290.robot.commands.AutoRightCrossBaseline;
+import org.usfirst.frc.team4290.robot.commands.AutoRightScoreSwitch;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
@@ -46,11 +48,15 @@ public class Robot extends IterativeRobot {
 	public static CubeForkliftSubsystem cubeForklift;
 	public static ClimberSubsystem climber;
 	public static SolenoidSubsystem pneumatics;
-	
+	public static CameraServer server;
 	Command autonomousCommand;
 	SendableChooser<String> positionChooser;
 	SendableChooser<String> scoreChooser;
 
+	public static String LEFT_ARM = "leftArm";
+	public static String RIGHT_ARM = "rightArm";
+	public static String BOTH_ARM = "bothArm";
+	
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -58,19 +64,23 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
+		//Subsystem Declarations
 		driveTrain = new DriveTrain();
 		cubeForklift = new CubeForkliftSubsystem();
 		climber = new ClimberSubsystem();
 		pneumatics = new SolenoidSubsystem();
+		CameraServer.getInstance().startAutomaticCapture();
+		
 		RobotMap.init();
-//		chooser.addDefault("Default Auto", new ExampleCommand());
-//		// chooser.addObject("My Auto", new MyAutoCommand());
+		//Autonomous Program Selector
+		//Starting Posititon Selector
 		positionChooser = new SendableChooser<>();
-		positionChooser.addDefault("Middle", "M");//new AutoLeftCrossBaseline());
-		positionChooser.addObject("Right start", "R");//new AutoMiddleScoreLeftSwitch());
-		positionChooser.addObject("Left start", "L");//new AutoMiddleScoreLeftSwitch());
+		positionChooser.addDefault("Middle", "M");
+		positionChooser.addObject("Right start", "R");
+		positionChooser.addObject("Left start", "L");
 		SmartDashboard.putData("Start Position", positionChooser);
-//		SmartDashboard.updateValues();
+		
+		//Autonomous Program Selector
 		scoreChooser = new SendableChooser<>();
 		scoreChooser.addDefault("Score Switch", "switch");
 		scoreChooser.addObject("Cross baseline", "baseline");
@@ -112,9 +122,11 @@ public class Robot extends IterativeRobot {
 		SendableChooser<String> score = (SendableChooser<String>) SmartDashboard.getData("Score");
 		
 		switch (position.getSelected().toString()) {
+		//Middle Position Selector
 		case "M":
 			SmartDashboard.putString("Case M", "Case M");
 			switch (score.getSelected().toString()) {
+			//Middle Position Switch Autonomous Side Selector
 			case "switch":
 				SmartDashboard.putString("Case Switch", "Case M Switch");
 
@@ -125,16 +137,18 @@ public class Robot extends IterativeRobot {
 					autonomousCommand = new AutoMiddleScoreRightSwitch();
 				}
 				break;
+			//Middle Position Baseline Side Selector
 			case "baseline":
 				SmartDashboard.putString("Case M baseline", "Case M baseline");
 
-				if (gameData.charAt(1) == 'L') {
+				if (gameData.charAt(0) == 'L') {
 					autonomousCommand = new AutoMiddleCrossBaselineOnRight();
 				}
 				else {
 					autonomousCommand = new AutoMiddleCrossBaselineOnLeft();
 				}
 				break;
+			//Middle Position Scale Side Selector
 			case "scale":
 				SmartDashboard.putString("Case M scale", "Case M scale");
 				
@@ -143,43 +157,47 @@ public class Robot extends IterativeRobot {
 				}
 				else {
 					autonomousCommand = new AutoMiddleScoreRightScale();
-				//TODO: Add baseline commands
 				}
 				break;
 			default:
 				break;
 			}
 			break;
+		//Left Side Autonomous Selector
 		case "L":
 			SmartDashboard.putString("Case L", "Case L");
 
 			switch (score.getSelected().toString()) {
+			//Left Position Switch Selection
 			case "switch":
 				SmartDashboard.putString("Case L switch", "Case L switch");
 
 				if (gameData.charAt(0) == 'L') {
 					autonomousCommand = new AutoLeftScoreSwitch();
 				}
-				else if (gameData.charAt(1) == 'L'){
-					autonomousCommand = new AutoLeftScoreScale();
-				}
+//				else if (gameData.charAt(1) == 'L'){
+//					autonomousCommand = new AutoLeftScoreScale();
+//				}
 				else {
-					autonomousCommand = new AutoLeftCrossBaseline();
+					autonomousCommand = new AutoLeftCrossBaseline(false);
 				}
 				break;
+			//Left Position Baseline Selection
 			case "baseline":
 				SmartDashboard.putString("Case L baseline", "Case L baseline");
-
-				autonomousCommand = new AutoLeftCrossBaseline();
-				
+					autonomousCommand = new AutoLeftCrossBaseline(false);
 				break;
+			//Left Position Scale Selection	
 			case "scale": 
 				SmartDashboard.putString("Case L scale", "Case L scale");
 
-				if (gameData.charAt(1) == 'L') {
+				if (gameData.charAt(1) == 'L') 
+				{
 					autonomousCommand = new AutoLeftScoreScale();
-				}else {
-					autonomousCommand = new AutoLeftCrossBaseline(); 
+				}
+				else 
+				{
+					autonomousCommand = new AutoLeftCrossBaseline(false); 
 				}
 				
 				break;
@@ -187,27 +205,39 @@ public class Robot extends IterativeRobot {
 				break;
 			}
 			break;
+		//Right Side Autonomous Selector
 		case "R":
 			SmartDashboard.putString("Case R", "Case R");
-
 			switch (score.getSelected().toString()) {
+			//Right Position Switch Selection
 			case "switch":
 				SmartDashboard.putString("Case R switch", "Case R switch");
+				if(gameData.charAt(0) == 'R')
+				{
+					autonomousCommand = new AutoRightScoreSwitch();
+				}
+				else
+				{
+					autonomousCommand = new AutoRightCrossBaseline(false);
+				}
 				break;
+			//Right Position Baseline Selection
 			case "baseline":
 				SmartDashboard.putString("Case R baseline", "Case R baseline");
-
-				autonomousCommand = new AutoRightCrossBaseline();
-				
+				autonomousCommand = new AutoRightCrossBaseline(false);
 				break;
+			//Right Position Scale Selection
 			case "scale":		
 				SmartDashboard.putString("Case R scale", "Case R scale");
 
-				if (gameData.charAt(1) == 'R') {
-				autonomousCommand = new AutoLeftScoreScale();
-			}else {
-				autonomousCommand = new AutoLeftCrossBaseline(); 
-			}
+				if (gameData.charAt(1) == 'R') 
+				{
+					autonomousCommand = new AutoLeftScoreScale();
+				}
+				else 
+				{
+					autonomousCommand = new AutoLeftCrossBaseline(false); 
+				}
 				
 				break;
 			default:
@@ -221,26 +251,21 @@ public class Robot extends IterativeRobot {
 		
 		SmartDashboard.putString("default", position.getSelected().toString() + " " + score.getSelected().toString());
 
-		//TODO: REMOVE THIS FOR TESTING ONLY
-//		autonomousCommand = new AutoLeftScoreScale();			
+//		autonomousCommand = new AutoLeftScoreSwitch();
 		
-//		autonomousCommand = chooser.getSelected();
-
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
+		if (autonomousCommand != null) 
+		{
 			autonomousCommand.start();
+		}
+		else
+		{
+			SmartDashboard.putString("No Autonomous Command", "No Autonomous Command");
+			autonomousCommand = new AutoLeftCrossBaseline(false);
+			autonomousCommand.start();
+		}
 	}
 
-	/**
-	 * This function is called periodically during autonomous
-	 */
+
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
@@ -248,33 +273,24 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
+
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		
 //		SmartDashboard.putNumber("Gyro Init", RobotMap.turningGyro.getAngle());
 	}
 
-	/**
-	 * This function is called periodically during operator control
-	 */
+
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		//Get Sonar Distance and Display on Smart Dashboard
     	double sonarDistance = RobotMap.sonarSensor.getVoltage() * 40.69;
     	sonarValues.add(sonarDistance);
     	SmartDashboard.putNumber("distance", sonarDistance);
     	SmartDashboard.putNumber("sonar teleop distance", getAverageDistance());
-		
-//		SmartDashboard.putNumber("Gyro Periodic", RobotMap.turningGyro.getAngle());
-	}
+			}
 
-	/**
-	 * This function is called periodically during test mode
-	 */
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
@@ -284,6 +300,7 @@ public class Robot extends IterativeRobot {
 	
 
 	private double getAverageDistance() {
+		//Get an Average Distance from Sonar to Remove Outlier Values
     	SmartDashboard.putNumber("Avg array size", sonarValues.size());
     	if (sonarValues.size() > 15) {
     		sonarValues.sort(Comparator.reverseOrder());

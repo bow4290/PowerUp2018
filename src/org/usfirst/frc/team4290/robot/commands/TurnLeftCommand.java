@@ -12,12 +12,20 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnLeftCommand extends Command {
 	
 	private double angle = 0.0;
+	private boolean fast = false;
 //	private static double const 90DEGREES = 90.0;
 
     public TurnLeftCommand(double angle) {
     	this.angle = angle;
+    	this.fast = false;
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
+    }
+    
+    public TurnLeftCommand(double angle, boolean fast)
+    {
+    	this.angle = angle;
+    	this.fast = fast;
     }
 
     // Called just before this Command runs the first time
@@ -28,7 +36,14 @@ public class TurnLeftCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveTrain.turnLeft();
+    	if(fast)
+    	{
+    		Robot.driveTrain.turnLeftFast();
+    	}
+    	else
+    	{
+    		Robot.driveTrain.turnLeft();
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -9,29 +9,30 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class CubeForkliftSubsystem extends Subsystem {
 
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.
-
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     
+    //Raise Forklift
     public void forkliftUp()
     {
-    	RobotMap.cubeForkliftMotor.set(0.65);
+    	RobotMap.cubeForkliftMotor.set(0.75);
     }
     
+    //Lower Forklift
     public void forkliftDown()
     {
     	RobotMap.cubeForkliftMotor.set(-0.65);
     }
     
+    //Hold Forklift at current height
     public void forkliftHold()
     {
     	RobotMap.cubeForkliftMotor.set(0.1);
     }
     
+    //Stop Forklift Commands
     public void stop()
     {
     	RobotMap.cubeForkliftMotor.set(0);

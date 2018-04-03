@@ -8,64 +8,71 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoMiddleScoreLeftSwitch extends CommandGroup {
 
     public AutoMiddleScoreLeftSwitch() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
     	
-    	//TODO
-//    	addSequential(new CubeGrabCommand(), 1.0);
-////    	moveForward command parallel
-//    	addSequential(new MoveForwardCommand(12.0), 0.5);
-//    	//cube grab command parallel    	// left turn command sequential
-//    	addSequential(new TurnLeftCommand) );
-//    	//move forward command sequential
-//    	addSequential(new MoveForwardCommand(12.0), 2.5);
-//    	//right turn command sequential
-//    	addSequential(new TurnRightCommand() );
-//    	//move forward command sequential
-//    	addParallel(new MoveForwardCommand(6.0), 2.35);
-//    	addParallel(new ForkliftRaiseCommand(), 1.0);
-//    	//right turn command sequential
-//    	addSequential(new TurnRightCommand() );
-////    	raise fork lift command parallel
-//    	addParallel(new ForkliftRaiseCommand(), 1.0);
-//    	//move forward command parallel
-//    	addParallel(new MoveForwardCommand(0.0), 1.0);
-//    	//drop cube command sequential
-//    	addSequential(new CubeDropCommand(), 1.0);
-//    	//move backwards command parallel
-//    	addParallel(new MoveBackwardCommand(), 1.0);
-////    	lower fork lift command parallel
-//    	addParallel(new ForkliftLowerCommand(), 1.0);
-    	
+    	//Grab Cube 1 While Moving Forward
     	addSequential(new CubeGrabCommand(), 0.5);
-    	
-    	addSequential(new MoveForwardCommand(0.0), 0.5);
-    	
+    	//addParallel(new MoveForwardCommand(0.0), 0.5);
+    	addSequential(new MoveForwardCommand(0.0, true), 0.45);
+
+    	//Turn Toward Switch
     	addSequential(new TurnLeftCommand(50.0));
     	
-    	addParallel(new ForkliftRaiseCommand(), 5.0);
-    	addParallel(new MoveForwardCommand(0.0), 2.25);
+    	//Move Toward Switch while Raising Forklift
+    	addParallel(new ForkliftRaiseCommand(), 1.5);
+    	//addParallel(new MoveForwardCommand(0.0), 2.25);
+    	addParallel(new MoveForwardCommand(0.0, true), 1.0);
     	
-    	addSequential(new TurnRightCommand(50.0));
-    	    	
-    	addSequential(new MoveForwardCommand(0.0), 1.0);
+    	//Turn to Face Switch
+    	addSequential(new TurnRightCommand(27.5));
     	
-    	addSequential(new CubeDropCommand(), 1.0);
+    	//Move to Edge of Switch
+    	//addSequential(new MoveForwardCommand(0.0), 1.0);
+    	addSequential(new MoveForwardCommand(0.0, true), 1.0);
     	
-    	addSequential(new MoveBackwardCommand(), 1.0);
-        	
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	//Drop Cube 1 in Switch
+    	addSequential(new CubeDropCommand(), 0.5);
+    	
+    	//Back away from Switch
+    	addSequential(new MoveBackwardCommand(true), 1.0);
+    	
+    	//Lower Forklift
+    	addSequential(new ForkliftLowerCommand(), 1.5);
+    	
+    	//Turn to Face Cube Stack
+    	addSequential(new TurnRightCommand(30.0, true));
+    	
+    	//Move Towards Cube Stack
+    	addSequential(new MoveForwardCommand(0.0, true), 1.45);
+    	
+    	//Face Cube Stack
+    	addSequential(new TurnLeftCommand(30.0, true));
+    	
+    	//Move towards Cube Stack
+    	addSequential(new MoveForwardCommand(0.0, true), .75);
+    	
+    	//Grab Cube 2
+    	addSequential(new CubeGrabCommand(), 0.5);
+    	
+    	//Move away from Cube Stack
+    	addSequential(new MoveBackwardCommand(true), 0.5);
+    	
+    	//Turn Towards Switch Staging Area
+//    	addSequential(new TurnLeftCommand(60.0, true));
+    	
+    	//Move Towards Switch Staging Area
+//    	addSequential(new MoveForwardCommand(0.0, true), 1.0);
+    	
+    	//While Raising Forklift
+//    	addSequential(new ForkliftRaiseCommand(), 2.0);
+    	
+    	//Turn Towards Switch
+//    	addSequential(new TurnRightCommand(30.0, true));
+    	
+    	//Move Towards Switch
+//    	addSequential(new MoveForwardCommand(0.0, true), 1.0);
+    	
+    	//Drop Cube 2 in Switch
+//    	addSequential(new CubeDropCommand(), 0.5);
+    	
     }
 }

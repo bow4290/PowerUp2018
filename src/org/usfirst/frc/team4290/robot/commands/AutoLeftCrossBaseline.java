@@ -7,26 +7,20 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class AutoLeftCrossBaseline extends CommandGroup {
 
-    public AutoLeftCrossBaseline() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
+    public AutoLeftCrossBaseline(boolean scale) {
+     
+    	//TODO: Add Sequence
+    	//Grab Cube
+    	addSequential(new CubeGrabCommand(), 0.5);
     	
-    	// TODO: Sequence to add:
-    	// Add Sequential Drive Forward
-    	addSequential(new MoveForwardCommand(20.0));//, 4);
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	//Move Forward Past Baseline
+    	addSequential(new MoveForwardCommand(0.0), 3.5);
+    	
+    	if(scale)
+    	{
+    		addSequential(new ForkliftRaiseCommand(), 4.0);
+    	}
+    	
     }
+    
 }

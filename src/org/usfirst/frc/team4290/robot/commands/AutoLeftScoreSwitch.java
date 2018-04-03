@@ -8,39 +8,63 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoLeftScoreSwitch extends CommandGroup {
 
     public AutoLeftScoreSwitch() {
-        // Add Commands here:
-        // e.g. addSequential(new Command1());
-        //      addSequential(new Command2());
-        // these will run in order.
     	
-    	// TODO: Add Sequence
-    	// Add Grab Cube Sequence
-    	addSequential(new CubeGrabCommand(), 1.0);
-    	// Add Move Forward Sequence
-    	addParallel(new ForkliftRaiseCommand(), 6.0);
-    	addParallel(new MoveForwardCommand(0.0), 3.0);
-    	// Add Turn Right Sequence
+    	//TODO: Add Sequence
+    	
+    	//Grab Cube 1
+    	addSequential(new CubeGrabCommand(), 0.5);
+    	
+    	//Raise Forklift to Switch Height
+    	addParallel(new ForkliftRaiseCommand(), 2.5);
+    	//While Moving Toward Switch Staging Area
+    	addParallel(new MoveForwardCommand(0.0), 2.5);
+    	
+    	//Turn to Face Switch
     	addSequential(new TurnRightCommand(90.0));
-    	// Add Move Forward Parallel
-    	addSequential(new MoveForwardCommand(0.0), 0.5);
-    	// Add Drop Cube Sequence
-    	addSequential(new CubeDropCommand(), 1.0);
-    	// Add Move Backwards Parallel
-    	addSequential(new MoveBackwardCommand(), 1.0);
-    	// Add Lower Forklift Parallel
-    	addSequential(new ForkliftLowerCommand(), 1.0);
+    	
+    	//Move Towards Switch
+    	addSequential(new MoveForwardCommand(0.0), 1.0);
+    	
+    	//Drop Cube in Switch
+    	addSequential(new CubeDropCommand(), 0.5);
+    	
+    	//Move Away from Switch
+    	addParallel(new MoveBackwardCommand(), 1.0);
+    	//While Lowering Forklift
+    	addParallel(new ForkliftLowerCommand(), 2.5);
 
-
-        // To run multiple commands at the same time,
-        // use addParallel()
-        // e.g. addParallel(new Command1());
-        //      addSequential(new Command2());
-        // Command1 and Command2 will run in parallel.
-
-        // A command group will require all of the subsystems that each member
-        // would require.
-        // e.g. if Command1 requires chassis, and Command2 requires arm,
-        // a CommandGroup containing them would require both the chassis and the
-        // arm.
+    	//2 Cube Switch Auto Testing
+   	
+    	//Turn Left Towards Scale
+    	//addSequential(new TurnLeftCommand(90));
+    	
+    	//Move Forward Past Switch
+    	//addSequential(new MoveForwardCommand(0.0), 0.75);
+    	
+    	//Turn Towards Cube 2
+    	//addSequential(new TurnRightCommand(90));
+    	
+    	//Move Towards Cube 2
+    	//addSequential(new MoveForwardCommand(0.0), 1.0);
+    	
+    	//Grab Cube 2
+    	//addSequential(new CubeGrabCommand(), 0.5);
+    	
+    	//Move Backwards
+    	//addParallel(new MoveBackwardCommand(), 0.5);
+    	//While Raising Forklift
+    	//addParallel(new ForkliftRaiseCommand(), 3.0);
+    	
+    	//Turn Towards Switch
+    	//addSequential(new TurnRightCommand(90.0));
+    	
+    	//Drop Cube 2 in Switch
+    	//addSequential(new CubeDropCommand(), 0.5);
+    	
+    	//Move Away from Switch
+    	//addParallel(new MoveBackwardCommand(), 2.0);
+    	//While Lowering Forklift
+    	//addParallel(new ForkliftLowerCommand(), 2.0);
+       
     }
 }
