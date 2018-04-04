@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4290.robot.commands;
 
+import org.usfirst.frc.team4290.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -12,7 +14,7 @@ public class AutoLeftScoreSwitch extends CommandGroup {
     	//TODO: Add Sequence
     	
     	//Grab Cube 1
-    	addSequential(new CubeGrabCommand(), 0.5);
+    	addSequential(new CubeGrabCommand(Robot.BOTH_ARM), 0.5);
     	
     	//Raise Forklift to Switch Height
     	addParallel(new ForkliftRaiseCommand(), 2.5);
@@ -26,7 +28,7 @@ public class AutoLeftScoreSwitch extends CommandGroup {
     	addSequential(new MoveForwardCommand(0.0), 1.0);
     	
     	//Drop Cube in Switch
-    	addSequential(new CubeDropCommand(), 0.5);
+    	addSequential(new CubeDropCommand(Robot.BOTH_ARM), 0.5);
     	
     	//Move Away from Switch
     	addParallel(new MoveBackwardCommand(), 1.0);

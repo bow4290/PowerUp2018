@@ -38,7 +38,7 @@ public class RobotMap {
 	public static DoubleSolenoid gearShiftSolenoid;
 	public static DoubleSolenoid cubeGrabRightSolenoid;
 	public static DoubleSolenoid cubeGrabLeftSolenoid;
-	public static DoubleSolenoid cubeGrabSolenoid;
+//	public static DoubleSolenoid cubeGrabSolenoid;
 	
 	//Sensors
 	public static AnalogInput sonarSensor; 
@@ -64,8 +64,8 @@ public class RobotMap {
 		sonarSensor = new AnalogInput(0);
 
 		//Pneumatics
-//		cubeGrabRightSolenoid = new DoubleSolenoid(0, 0);
-		cubeGrabSolenoid = new DoubleSolenoid(2, 3);
+		cubeGrabRightSolenoid = new DoubleSolenoid(4, 5);
+		cubeGrabLeftSolenoid = new DoubleSolenoid(2, 3);
 		gearShiftSolenoid = new DoubleSolenoid(0, 1);
 
 	}

@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class CubeGrabCommand extends Command {
-    public CubeGrabCommand() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+	private String arm = "";
+    public CubeGrabCommand(String arm) {
+        this.arm = arm;
     }
 
     // Called just before this Command runs the first time
@@ -19,21 +19,21 @@ public class CubeGrabCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	if(Robot.LEFT_ARM.equals(arm))
-//    	{
-//    		Robot.pneumatics.closeLeftGrabber();
-//    	}
-//    	else if(Robot.RIGHT_ARM.equals(arm))
-//    	{
-//    		Robot.pneumatics.closeRightGrabber();
-//    	}
-//    	else
-//    	{
-//    		Robot.pneumatics.closedCubeGrabber();
-//    	}    
-//    }
-    	Robot.pneumatics.closedCubeGrabber();
+    	if(Robot.LEFT_ARM.equals(arm))
+    	{
+    		Robot.pneumatics.closeLeftGrabber();
+    	}
+    	else if(Robot.RIGHT_ARM.equals(arm))
+    	{
+    		Robot.pneumatics.closeRightGrabber();
+    	}
+    	else
+    	{
+    		Robot.pneumatics.closedCubeGrabber();
+    	}    
     }
+//    	Robot.pneumatics.closedCubeGrabber();
+    
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;

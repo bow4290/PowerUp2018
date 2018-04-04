@@ -28,6 +28,10 @@ public class OI {
 	public JoystickButton climbUpButton;
 	public JoystickButton shiftHighButton;
 	public JoystickButton shiftLowButton;
+	public JoystickButton cubeGrabLeftButton;
+	public JoystickButton cubeGrabRightButton;
+	public JoystickButton cubeDropLeftButton;
+	public JoystickButton cubeDropRightButton;
 	
 	public XboxController mainXBoxController;
 	public XboxController secondaryXBoxController;
@@ -38,11 +42,24 @@ public class OI {
 //		Cube Grabber Buttons
 //		Drop Cube Button
 		cubeDropButton = new JoystickButton(mainXBoxController, 6);
-		cubeDropButton.whileHeld(new CubeDropCommand());
+		cubeDropButton.whileHeld(new CubeDropCommand(Robot.BOTH_ARM));
 //		Grab Cube Button
 		cubeGrabButton = new JoystickButton(mainXBoxController, 5);
-		cubeGrabButton.whileHeld(new CubeGrabCommand());
-
+		cubeGrabButton.whileHeld(new CubeGrabCommand(Robot.BOTH_ARM));
+		
+//		Open Right Grabber Arm
+		cubeDropRightButton = new JoystickButton(mainXBoxController, 1);
+		cubeDropRightButton.whileHeld(new CubeDropCommand(Robot.RIGHT_ARM));
+//		Open Left Grabber Arm
+		cubeDropLeftButton = new JoystickButton(mainXBoxController, 2);
+		cubeDropLeftButton.whileHeld(new CubeDropCommand(Robot.LEFT_ARM));
+//		Close Right Grabber Arm
+		cubeGrabRightButton = new JoystickButton(mainXBoxController, 3);
+		cubeGrabRightButton.whileHeld(new CubeGrabCommand(Robot.RIGHT_ARM));
+//		Close Left Grabber Arm
+		cubeGrabLeftButton = new JoystickButton(mainXBoxController, 4);
+		cubeGrabLeftButton.whileHeld(new CubeGrabCommand(Robot.LEFT_ARM));
+		
 //		Gear Shift Buttons
 //		Shift To High Gear
 		shiftHighButton = new JoystickButton(mainXBoxController, 8);

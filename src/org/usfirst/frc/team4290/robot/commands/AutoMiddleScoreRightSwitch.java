@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4290.robot.commands;
 
+import org.usfirst.frc.team4290.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -10,29 +12,29 @@ public class AutoMiddleScoreRightSwitch extends CommandGroup {
     public AutoMiddleScoreRightSwitch() {
     	
     	//Grab Cube 1 While Moving Forward
-    	addSequential(new CubeGrabCommand(), 0.5);
+    	addSequential(new CubeGrabCommand(Robot.BOTH_ARM), 0.5);
     	
     	//addParallel(new MoveForwardCommand(0.0), 0.5);
-    	addSequential(new MoveForwardCommand(0.0, true), 0.45);
-
+    	addParallel(new MoveForwardCommand(0.0, true), 0.45);
+    	addParallel(new ForkliftRaiseCommand(), 0.5);
     	//Turn Toward Switch
     	addSequential(new TurnRightCommand(50.0));
 
     	//Move Toward Switch while Raising Forklift
     	addParallel(new ForkliftRaiseCommand(), 1.5);
     	//addParallel(new MoveForwardCommand(0.0), 2.25);
-    	addParallel(new MoveForwardCommand(0.0, true), 1.0);
+    	addParallel(new MoveForwardCommand(0.0, true), 1.1);
 
     	//Turn to Face Switch
     	addSequential(new TurnLeftCommand(40.0));
     	
     	//Move to Edge of Switch
     	//addSequential(new MoveForwardCommand(0.0), 1.0);
-    	addSequential(new MoveForwardCommand(0.0, true), 1.0);
+    	addSequential(new MoveForwardCommand(0.0, true), 0.9);
 
     	
     	//Drop Cube 1 in Switch
-    	addSequential(new CubeDropCommand(), 0.5);
+    	addSequential(new CubeDropCommand(Robot.BOTH_ARM), 0.5);
     	
     	//Back away from Switch
     	addSequential(new MoveBackwardCommand(true), 1.0);
@@ -53,7 +55,7 @@ public class AutoMiddleScoreRightSwitch extends CommandGroup {
     	addSequential(new MoveForwardCommand(0.0, true), .75);
     	
     	//Grab Cube 2
-    	addSequential(new CubeGrabCommand(), 0.5);
+    	addSequential(new CubeGrabCommand(Robot.BOTH_ARM), 0.5);
     	
     	//Move away from Cube Stack
     	addSequential(new MoveBackwardCommand(true), 0.5);

@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4290.robot.commands;
 
+import org.usfirst.frc.team4290.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -12,7 +14,7 @@ public class AutoMiddleCrossBaselineOnRight extends CommandGroup {
     	// TODO: Add Sequences
     	
     	//Grab Cube
-    	addParallel(new CubeGrabCommand(), 0.5);
+    	addParallel(new CubeGrabCommand(Robot.BOTH_ARM), 0.5);
     	//While Moving Forward
     	addParallel(new MoveForwardCommand(12.0), 0.5);
     	

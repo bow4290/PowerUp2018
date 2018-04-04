@@ -1,5 +1,7 @@
 package org.usfirst.frc.team4290.robot.commands;
 
+import org.usfirst.frc.team4290.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -12,7 +14,7 @@ public class AutoMiddleScoreRightScale extends CommandGroup {
     	//TODO: Add Sequence
     	
     	//Grab Cube
-    	addParallel(new CubeGrabCommand(), 0.5);
+    	addParallel(new CubeGrabCommand(Robot.BOTH_ARM), 0.5);
     	//While Moving Forward
     	addParallel(new MoveForwardCommand(0.0), 0.5);
     	
@@ -34,7 +36,7 @@ public class AutoMiddleScoreRightScale extends CommandGroup {
     	addSequential(new TurnLeftCommand(90.0));
     	
     	//Drop Cube in Scale
-    	addSequential(new CubeDropCommand(), 1.0);
+    	addSequential(new CubeDropCommand(Robot.BOTH_ARM), 1.0);
     	
     	//Move Away from Scale
 //    	addParallel(new MoveBackwardCommand(), 1.0);

@@ -30,17 +30,17 @@ public class SolenoidSubsystem extends Subsystem {
     
     //Release Cube
     public void openCubeGrabber() {
-//    	RobotMap.cubeGrabLeftSolenoid.set(Value.kForward);
-//    	RobotMap.cubeGrabRightSolenoid.set(Value.kForward);
-    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
+    	RobotMap.cubeGrabLeftSolenoid.set(Value.kForward);
+    	RobotMap.cubeGrabRightSolenoid.set(Value.kForward);
+//    	RobotMap.cubeGrabSolenoid.set(Value.kForward);
 
     }
     
     //Grab Cube
     public void closedCubeGrabber() {
-//    	RobotMap.cubeGrabLeftSolenoid.set(Value.kReverse);
-//    	RobotMap.cubeGrabRightSolenoid.set(Value.kReverse);
-    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
+    	RobotMap.cubeGrabLeftSolenoid.set(Value.kReverse);
+    	RobotMap.cubeGrabRightSolenoid.set(Value.kReverse);
+//    	RobotMap.cubeGrabSolenoid.set(Value.kReverse);
     	
     }
     

@@ -18,6 +18,7 @@ import java.util.Comparator;
 import org.usfirst.frc.team4290.robot.commands.AutoLeftCrossBaseline;
 import org.usfirst.frc.team4290.robot.commands.AutoLeftScoreScale;
 import org.usfirst.frc.team4290.robot.commands.AutoLeftScoreSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoLeftToRightScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleCrossBaselineOnLeft;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleCrossBaselineOnRight;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftScale;
@@ -25,7 +26,9 @@ import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreLeftSwitch;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightScale;
 import org.usfirst.frc.team4290.robot.commands.AutoMiddleScoreRightSwitch;
 import org.usfirst.frc.team4290.robot.commands.AutoRightCrossBaseline;
+import org.usfirst.frc.team4290.robot.commands.AutoRightScoreScale;
 import org.usfirst.frc.team4290.robot.commands.AutoRightScoreSwitch;
+import org.usfirst.frc.team4290.robot.commands.AutoRightToLeftScale;
 import org.usfirst.frc.team4290.robot.commands.TurnXDegrees;
 import org.usfirst.frc.team4290.robot.subsystems.ClimberSubsystem;
 import org.usfirst.frc.team4290.robot.subsystems.CubeForkliftSubsystem;
@@ -175,9 +178,9 @@ public class Robot extends IterativeRobot {
 				if (gameData.charAt(0) == 'L') {
 					autonomousCommand = new AutoLeftScoreSwitch();
 				}
-//				else if (gameData.charAt(1) == 'L'){
-//					autonomousCommand = new AutoLeftScoreScale();
-//				}
+				else if (gameData.charAt(1) == 'L'){
+					autonomousCommand = new AutoLeftScoreScale();
+				}
 				else {
 					autonomousCommand = new AutoLeftCrossBaseline(false);
 				}
@@ -197,7 +200,7 @@ public class Robot extends IterativeRobot {
 				}
 				else 
 				{
-					autonomousCommand = new AutoLeftCrossBaseline(false); 
+					autonomousCommand = new AutoLeftToRightScale(); 
 				}
 				
 				break;
@@ -218,7 +221,7 @@ public class Robot extends IterativeRobot {
 				}
 				else
 				{
-					autonomousCommand = new AutoRightCrossBaseline(false);
+					autonomousCommand = new AutoRightToLeftScale();
 				}
 				break;
 			//Right Position Baseline Selection
@@ -232,7 +235,7 @@ public class Robot extends IterativeRobot {
 
 				if (gameData.charAt(1) == 'R') 
 				{
-					autonomousCommand = new AutoLeftScoreScale();
+					autonomousCommand = new AutoRightScoreScale();
 				}
 				else 
 				{

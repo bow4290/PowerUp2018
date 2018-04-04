@@ -15,7 +15,7 @@ public class AutoLeftScoreScale extends CommandGroup {
     	// TODO: Add Sequence
     	
     	//Grab Cube
-    	addSequential(new CubeGrabCommand(), 0.5);
+    	addSequential(new CubeGrabCommand(Robot.BOTH_ARM), 0.5);
     	
     	//Move Forward to Scale Staging Area
     	addParallel(new MoveForwardCommand(0.0, true), 3.75);
@@ -31,12 +31,19 @@ public class AutoLeftScoreScale extends CommandGroup {
     	addSequential(new MoveForwardCommand(0.0), 0.85);
     	
     	//Drop Cube in Scale
-    	addSequential(new CubeDropCommand(), 0.5);
+    	addSequential(new CubeDropCommand(Robot.BOTH_ARM), 0.5);
     	
-//    	//Move Away from Scale
+    	//Move Away from Scale
     	addSequential(new MoveBackwardCommand(), 0.75);
-//    	//Lower Forklift at Same Time
+    	//Lower Forklift at Same Time
     	addSequential(new ForkliftLowerCommand(), 4.0);
+    	
+    	//Turn Towards Alliance Switch
+    	addSequential(new TurnRightCommand(75.0));
+    	
+    	//Move Towards Alliance Switch
+    	addSequential(new MoveForwardCommand(0.0, true), 1.5);
+    	
 
      
     }
